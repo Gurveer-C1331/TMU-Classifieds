@@ -1,0 +1,27 @@
+#logo-nav {
+  width: 260px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 3em 4em;
+}
+
+#link-container {
+  display: block;
+  margin: auto 0;
+}
+
+#link-container span {
+  margin-left: 2em;
+  font-weight: 500;
+}
+
+#login-btn {
+  font-weight: 400 !important;
+  padding: .8em 1em;
+  background-color: #004c9b;
+  color: #FFF;
+  border-radius: 10px;
+}
