@@ -1,0 +1,49 @@
+#classified-ads-heading {
+  text-align: center;
+}
+
+#page-subheading {
+  font-size: 0.9em;
+  color: #999;
+}
+
+#classified-ads-toolbar {
+  text-align: center;
+  margin-top: 1.4em;
+}
+
+#classified-ads-search {
+  display: inline-block;
+  padding: 0.5em;
+  border-radius: 50px;
+  border: 2px solid #004c9b;
+}
+
+#classified-ads-searchbar {
+  padding: 0.6em 1em;
+  border-radius: 20px;
+  border: none;
+  width: 24em;
+}
+
+#classified-ads-searchbar:focus {
+  outline: none;
+}
+
+#classified-ads-search-btn {
+  padding: 0.6em 1.2em;
+  margin-left: 1em;
+  border-radius: 20px;
+  background: #FFDC00;
+  color: #004c9b;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+#classified-ads-filter-btn {
+  padding: 0.8em 1.2em;
+  margin-left: 1em;
+  border-radius: 20px;
+  background: #004c9b;
+  vertical-align: middle;
+}
