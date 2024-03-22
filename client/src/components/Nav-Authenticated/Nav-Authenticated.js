@@ -3,10 +3,12 @@ import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Divider from '@mui/material/Divider';
 import tmuLogo from '../../assets/tmu-logo.svg';
-import './Nav.css';
+import '../Nav/Nav.css';
+import './Nav-Authenticated.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars} from '@fortawesome/free-solid-svg-icons'
+import { faBars, faMessage, faPlus, faUser} from '@fortawesome/free-solid-svg-icons'
 
 const StyledBtn = styled((props) => (
   <Button
@@ -61,7 +63,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-function Nav() {
+function NavAuthenticated() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -76,8 +78,13 @@ function Nav() {
       <img src={tmuLogo} id='logo-nav' alt='TMU Logo'></img>
 
       <div id='link-container'>
-        <span className='sign-up-btn'>Sign up</span>
-        <span className='login-btn'>Log in</span>
+        <span className='nav-btn'>Classified Ads</span>
+        <span className='nav-btn'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></span>
+        <span className='nav-btn'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></span>
+        <span className='nav-btn' id='profile-link'>
+        <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{color: "#004c9b"}} />
+          John Doe
+        </span>
       </div>
 
       <div id='sm-link-container'>
@@ -109,10 +116,20 @@ function Nav() {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose} disableRipple>
-            <span className='sign-up-btn'>Sign up</span>
+            <span className='nav-btn'>Classified Ads</span>
           </MenuItem>
-          <MenuItem className='login-btn' onClick={handleClose} disableRipple>
-            <span className='login-btn'>Log in</span>
+          <MenuItem onClick={handleClose} disableRipple>
+            <span className='nav-btn'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></span>
+          </MenuItem>
+          <MenuItem onClick={handleClose} disableRipple>
+            <span className='nav-btn'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></span>
+          </MenuItem>
+          <Divider sx={{ my: 0.5 }} />
+          <MenuItem onClick={handleClose} disableRipple>
+            <span className='nav-btn' id='profile-link'>
+              <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{color: "#004c9b"}} />
+              John Doe
+            </span>
           </MenuItem>
         </StyledMenu>
       </div>
@@ -120,4 +137,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default NavAuthenticated;

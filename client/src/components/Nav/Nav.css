@@ -1,5 +1,5 @@
 #logo-nav {
-  width: 260px;
+  width: 16em;
 }
 
 header {
@@ -16,12 +16,65 @@ header {
 #link-container span {
   margin-left: 2em;
   font-weight: 500;
+  cursor: pointer;
 }
 
-#login-btn {
+#link-container span:hover {
+  font-weight: 600;
+}
+
+#sm-link-container {
+  display: none;
+  margin: auto 0;
+}
+
+.login-btn {
   font-weight: 400 !important;
   padding: .8em 1em;
   background-color: #004c9b;
   color: #FFF;
   border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+  header {
+      font-size: 1em;
+  }
+
+  #link-container {
+    display: none;
+  }
+
+  #sm-link-container {
+    display: block;
+  }
+
+  .sign-up-btn, .login-btn {
+    font-size: .9em;
+  }
+}
+
+@media (max-width: 500px) {
+  header {
+      font-size: 0.9em;
+      padding: 2em;
+  }
+
+  .MuiPaper-root {
+    font-size: 0.9em;
+  }
+
+  .sign-up-btn, .login-btn {
+    font-size: .8em;
+  }
+}
+
+@media (max-width: 350px) {
+  header {
+      font-size: 0.8em;
+  }
+
+  .MuiPaper-root {
+    font-size: 0.8em;
+  }
 }

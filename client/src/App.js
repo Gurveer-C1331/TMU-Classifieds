@@ -1,9 +1,10 @@
 import React from 'react';
-import { Navigate, Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 
 import './App.css';
 
 import Nav from './components/Nav/Nav';
+import NavAuthenticated from './components/Nav-Authenticated/Nav-Authenticated';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import ClassifiedAds from './pages/Classified-Ads/Classified-Ads';
@@ -11,7 +12,8 @@ import ClassifiedAds from './pages/Classified-Ads/Classified-Ads';
 function App() {
   return (
     <div className="App">
-      <Nav></Nav>
+      {/* <Nav></Nav> */}
+      <NavAuthenticated></NavAuthenticated>
       
       <Routes>
         <Route exact path='/' element={<Home></Home>}></Route>
