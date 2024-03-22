@@ -2,9 +2,20 @@
   font-size: 1.3em;
 }
 
+.nav-btn {
+  text-decoration: none;
+  margin-left: 2em;
+  font-weight: 400;
+  color: #000;
+}
+
+.nav-btn:hover {
+  font-weight: 500;
+}
+
 #profile-image {
   display: inline-block;
-  margin-right: 1em;
+  margin-right: 0.4em;
   border-radius: 20px;
 }
 
@@ -17,6 +28,7 @@
 
   .nav-btn {
     font-size: 0.9em;
+    margin: 0;
   }
 }
 
