@@ -1,0 +1,27 @@
+.nav-icon {
+  font-size: 1.3em;
+}
+
+#profile-image {
+  display: inline-block;
+  margin-right: 1em;
+  border-radius: 20px;
+}
+
+@media (max-width: 800px) {
+  #profile-image {
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 0.4em;
+  }
+
+  .nav-btn {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 500px) {
+  .nav-btn {
+    font-size: 0.8em;
+  }
+}

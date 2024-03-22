@@ -1,0 +1,75 @@
+#logo-footer {
+  width: 14em;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 3em 4em;
+}
+
+#site-info {
+  text-align: left;
+}
+
+#site-info span{
+  display: inline-block;
+  margin-top: 1em;
+}
+
+#address {
+  font-size: 0.9em;
+}
+
+#copyright-text {
+  font-size: 0.8em;
+  color: #004c9b;
+  font-weight: 500;
+}
+
+#social-media-container {
+  display: block;
+  margin: auto 0;
+}
+
+#social-media-container span {
+  display: inline-block;
+  margin-bottom: 1em;
+}
+
+.social-media-icons {
+  padding-left: 1em;
+}
+
+.social-media-icons:first-child {
+  padding-left: 0;
+}
+
+@media (max-width: 725px) {
+  footer {
+      font-size: 1em;
+  }
+}
+
+@media (max-width: 600px) {
+  footer {
+    display: grid;
+  }
+  
+  #social-media-container {
+    margin-top: 1em;
+  }
+}
+
+@media (max-width: 500px) {
+  footer {
+      font-size: 0.9em;
+      padding: 2em;
+  }
+}
+
+@media (max-width: 350px) {
+  footer {
+      font-size: 0.8em;
+  }
+}

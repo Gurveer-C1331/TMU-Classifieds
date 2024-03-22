@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Routes, Route, Outlet } from 'react-router-dom';
+
 import './App.css';
+
+import Nav from './components/Nav/Nav';
+import NavAuthenticated from './components/Nav-Authenticated/Nav-Authenticated';
+import Footer from './components/Footer/Footer';
+import Home from './pages/Home/Home';
+import ClassifiedAds from './pages/Classified-Ads/Classified-Ads';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Nav></Nav> */}
+      <NavAuthenticated></NavAuthenticated>
+      
+      <Routes>
+        <Route exact path='/' element={<Home></Home>}></Route>
+        <Route exact path='/classified-ads' element={<ClassifiedAds></ClassifiedAds>}></Route>
+      </Routes>
+      <Outlet></Outlet>
+
+      <Footer></Footer>
     </div>
   );
 }
