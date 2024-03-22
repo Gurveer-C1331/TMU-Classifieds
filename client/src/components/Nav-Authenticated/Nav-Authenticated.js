@@ -1,9 +1,7 @@
 import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Divider from '@mui/material/Divider';
+import { Button, Menu, MenuItem, Divider } from '@mui/material';
+import { Link, useLocation } from 'react-router-dom';
 import tmuLogo from '../../assets/tmu-logo.svg';
 import '../Nav/Nav.css';
 import './Nav-Authenticated.css';
@@ -64,6 +62,7 @@ const StyledMenu = styled((props) => (
 }));
 
 function NavAuthenticated() {
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -75,16 +74,22 @@ function NavAuthenticated() {
 
   return (
     <header>
-      <img src={tmuLogo} id='logo-nav' alt='TMU Logo'></img>
+      <Link className='home-btn' to='/'>
+        <img src={tmuLogo} id='logo-nav' alt='TMU Logo'></img>
+      </Link>
 
       <div id='link-container'>
-        <span className='nav-btn'>Classified Ads</span>
-        <span className='nav-btn'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></span>
-        <span className='nav-btn'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></span>
-        <span className='nav-btn' id='profile-link'>
+        <Link className='nav-btn' to='/classified-ads'
+          style={{
+            fontWeight: location.pathname === '/classified-ads' ? '600' : '400'
+        }}>
+          Classified Ads</Link>
+        <Link className='nav-btn' to='/'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></Link>
+        <Link className='nav-btn' to='/'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></Link>
+        <Link className='nav-btn' id='profile-link' to='/'>
         <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{color: "#004c9b"}} />
           John Doe
-        </span>
+        </Link>
       </div>
 
       <div id='sm-link-container'>
@@ -116,20 +121,20 @@ function NavAuthenticated() {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose} disableRipple>
-            <span className='nav-btn'>Classified Ads</span>
+            <Link className='nav-btn' to='/'>Classified Ads</Link>
           </MenuItem>
           <MenuItem onClick={handleClose} disableRipple>
-            <span className='nav-btn'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></span>
+            <Link className='nav-btn' to='/'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></Link>
           </MenuItem>
           <MenuItem onClick={handleClose} disableRipple>
-            <span className='nav-btn'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></span>
+            <Link className='nav-btn' to='/'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></Link>
           </MenuItem>
           <Divider sx={{ my: 0.5 }} />
           <MenuItem onClick={handleClose} disableRipple>
-            <span className='nav-btn' id='profile-link'>
+            <Link className='nav-btn' id='profile-link' to='/'>
               <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{color: "#004c9b"}} />
               John Doe
-            </span>
+            </Link>
           </MenuItem>
         </StyledMenu>
       </div>

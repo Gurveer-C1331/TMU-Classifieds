@@ -1,8 +1,7 @@
 import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import { Link, useLocation } from 'react-router-dom';
+import { Button, Menu, MenuItem } from '@mui/material';
 import tmuLogo from '../../assets/tmu-logo.svg';
 import './Nav.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -62,6 +61,7 @@ const StyledMenu = styled((props) => (
 }));
 
 function Nav() {
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -73,11 +73,13 @@ function Nav() {
 
   return (
     <header>
-      <img src={tmuLogo} id='logo-nav' alt='TMU Logo'></img>
+      <Link className='home-btn' to='/'>
+        <img src={tmuLogo} id='logo-nav' alt='TMU Logo'></img>
+      </Link>
 
       <div id='link-container'>
-        <span className='sign-up-btn'>Sign up</span>
-        <span className='login-btn'>Log in</span>
+        <Link className='sign-up-btn' to='/'>Sign up</Link>
+        <Link className='login-btn' to='/'>Log in</Link>
       </div>
 
       <div id='sm-link-container'>
@@ -109,10 +111,10 @@ function Nav() {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose} disableRipple>
-            <span className='sign-up-btn'>Sign up</span>
+            <Link className='sign-up-btn' to='/'>Sign up</Link>
           </MenuItem>
           <MenuItem className='login-btn' onClick={handleClose} disableRipple>
-            <span className='login-btn'>Log in</span>
+            <Link className='login-btn' to='/'>Log in</Link>
           </MenuItem>
         </StyledMenu>
       </div>
