@@ -88,7 +88,7 @@ function ClassifiedAds() {
         </div>
         <span id='classified-ads-filter-btn' onClick={handleFilterToggle}>
           <FontAwesomeIcon icon={faSliders} style={{color: "#FFF"}} />
-        </span>
+        </span><br></br>
 
         <div id='classified-ads-filter-options' style={{display: toggleFilters === true ? 'inline-block' : 'none'}}>
           <form onSubmit={handleFilterApply}>
