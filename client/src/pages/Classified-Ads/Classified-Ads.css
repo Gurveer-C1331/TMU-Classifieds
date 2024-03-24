@@ -38,6 +38,7 @@
   color: #004c9b;
   font-weight: 600;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 #classified-ads-filter-btn {
@@ -46,4 +47,114 @@
   border-radius: 20px;
   background: #004c9b;
   vertical-align: middle;
+  cursor: pointer;
+}
+
+#classified-ads-filter-options {
+  display: inline-block;
+  padding: 2em;
+  margin-top: 1em;
+  background-color: #EEE;
+  border-radius: 50px;
+}
+.filter-options-header {
+  color: #004c9b;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+#filter-categories, #filter-price {
+  display: flex;
+  margin: 1em 0 2em 0;
+  font-size: 0.9em;
+  justify-content: center;
+}
+
+#filter-categories div, #filter-price div {
+  display: flex;
+  margin: 0 0.5em;
+}
+
+#filter-categories label, #filter-price label {
+  margin: auto;
+}
+
+#filter-price div input {
+  padding: 0.6em 1em;
+  margin-left: 0.5em;
+  border-radius: 20px;
+  border: none;
+}
+
+#filter-price div input:focus {
+  outline: none;
+}
+
+#filter-control-btn button, #filter-control-btn input{
+  padding: 0.8em 2em;
+  margin-left: 1em;
+  border: none;
+  border-radius: 20px;
+  background: #004c9b;
+  color: #FFF;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#classified-ads-listing-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 8em;
+}
+
+#listing-total-count {
+  color: #004c9b;
+  font-weight: 500;
+}
+
+#listing-page-number {
+  color: #999;
+  font-size: 0.9em;
+}
+
+#listing-filters-applied span {
+  padding: 0.6em 1em;
+  background-color: #004c9b;
+  color: #FFF;
+  border-radius: 50px;
+  font-size: 0.8em;
+  margin-left: 1em;
+}
+
+#listing-filters-applied span:first-child {
+  margin-left: 0;
+}
+
+.filter-applied-x {
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+#classified-ads-listing-container {
+  padding: 0 8em;
+}
+
+@media (max-width: 750px) {
+  #classified-ads-listing-info {
+    padding: 2em 4em;
+  }
+
+  #classified-ads-listing-container {
+    padding: 0 4em;
+  }
+}
+
+@media (max-width: 500px) {
+  #classified-ads-listing-info {
+    padding: 2em;
+  }
+
+  #classified-ads-listing-container {
+    padding: 0 2em;
+  }
 }
