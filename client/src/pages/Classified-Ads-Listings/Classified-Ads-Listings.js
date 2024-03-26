@@ -6,13 +6,14 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faSliders, faXmark } from '@fortawesome/free-solid-svg-icons';
-import './Classified-Ads.css';
+import './Classified-Ads-Listings.css';
 import ListingImage from '../../assets/listing-image.svg';
 
 
-function ClassifiedAds() {
+function ClassifiedAdsListings() {
   const listingItems = [
     {id: 1, listing_title: 'Product title', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: 50, description: 'text'},
     {id: 2, listing_title: 'Product title', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 50, description: 'text'},
@@ -153,33 +154,35 @@ function ClassifiedAds() {
           <Grid container spacing={2}>
             {listingItems.map((item) => (
               <Grid key={item.id} item xs={4} sm={3} md={3} lg={2}>
-                <Card className='listing-cards' sx={{ maxWidth: 345 }} style={{
-                    boxShadow: '2px 2px 6px 2px rgba(0,0,0,0.14)'
-                  }}>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      // image={item.image}
-                      image={ListingImage}
-                      // alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography variant="body2" color="#004c9b" fontFamily={'Montserrat'} fontWeight={500} fontSize={'1em'}>
-                        {item.listing_type}
-                      </Typography>
-                      <Typography variant="subtitle2" fontFamily={'Montserrat'} fontSize={'1em'}>
-                        {item.listing_title}
-                      </Typography>
-                      <Typography variant="body2" fontFamily={'Montserrat'} color="#999" fontSize={'1em'}>
-                        {item.location}
-                      </Typography>
-                      <Typography variant="body2" fontFamily={'Montserrat'} fontSize={'1em'}>
-                        ${item.price}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+                <Link to={'/classified-ads/' + item.id} style={{textDecoration: 'none'}}>
+                  <Card className='listing-cards' sx={{ maxWidth: 345 }} style={{
+                      boxShadow: '2px 2px 6px 2px rgba(0,0,0,0.14)'
+                    }}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        // image={item.image}
+                        image={ListingImage}
+                        // alt="green iguana"
+                      />
+                      <CardContent>
+                        <Typography variant="body2" color="#004c9b" fontFamily={'Montserrat'} fontWeight={500} fontSize={'1em'}>
+                          {item.listing_type}
+                        </Typography>
+                        <Typography variant="subtitle2" fontFamily={'Montserrat'} fontSize={'1em'}>
+                          {item.listing_title}
+                        </Typography>
+                        <Typography variant="body2" fontFamily={'Montserrat'} color="#999" fontSize={'1em'}>
+                          {item.location}
+                        </Typography>
+                        <Typography variant="body2" fontFamily={'Montserrat'} fontSize={'1em'}>
+                          ${item.price}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Link>
               </Grid>
             ))}
           </Grid>
@@ -189,4 +192,4 @@ function ClassifiedAds() {
   );
 }
 
-export default ClassifiedAds;
+export default ClassifiedAdsListings;
