@@ -1,3 +1,7 @@
+#classified-ads {
+  padding: 0 8em;
+}
+
 #classified-ads-heading {
   text-align: center;
 }
@@ -97,6 +101,7 @@
   border-radius: 20px;
   background: #004c9b;
   color: #FFF;
+  font-size: 1em;
   vertical-align: middle;
   cursor: pointer;
 }
@@ -104,7 +109,7 @@
 #classified-ads-listing-info {
   display: flex;
   justify-content: space-between;
-  padding: 2em 8em;
+  padding: 2em 0;
 }
 
 #listing-total-count {
@@ -135,26 +140,60 @@
   cursor: pointer;
 }
 
-#classified-ads-listing-container {
-  padding: 0 8em;
+.listing-cards p, .listing-cards h6{
+  font-size: 1em;
+}
+
+@media (max-width: 900px) {
+  #classified-ads {
+    padding: 0 4em;
+  }  
 }
 
 @media (max-width: 750px) {
-  #classified-ads-listing-info {
-    padding: 2em 4em;
+  #classified-ads {
+    font-size: 0.9em
+  }  
+
+  #classified-ads-searchbar {
+    width: 16em;
   }
 
-  #classified-ads-listing-container {
-    padding: 0 4em;
+  #filter-categories, #filter-price {
+    flex-direction: column;
+  }
+
+  #filter-categories div, #filter-price div {
+    margin-bottom: 0.5em;
+  }
+
+  #filter-price div input {
+    width: 10em;
+  }
+
+  .listing-cards p, .listing-cards h6{
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 600px) {
+  #classified-ads-searchbar {
+    width: 12em;
   }
 }
 
 @media (max-width: 500px) {
-  #classified-ads-listing-info {
-    padding: 2em;
+
+  #classified-ads {
+    font-size: 0.8em;
+    padding: 0 2em;
+  } 
+
+  #classified-ads-searchbar {
+    width: 8em;
   }
 
-  #classified-ads-listing-container {
-    padding: 0 2em;
+  .listing-cards p, .listing-cards h6{
+    font-size: 0.8em;
   }
 }

@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSliders, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faSliders, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './Classified-Ads.css';
 import ListingImage from '../../assets/listing-image.svg';
 
@@ -75,16 +75,18 @@ function ClassifiedAds() {
   };
 
   return (
-    <div>
+    <div id='classified-ads'>
       <div id='classified-ads-heading'>
         <h1>Classified Ads</h1>
-        <span id='page-subheading'>And a subheading describing your site, too</span>
+        <span id='page-subheading'>What are you looking for today?</span>
       </div>
 
       <div id='classified-ads-toolbar'>
         <div id='classified-ads-search'>
-          <input id='classified-ads-searchbar' placeholder='What are you looking for today?'></input>
-          <span id='classified-ads-search-btn'>Search</span>
+          <input id='classified-ads-searchbar' placeholder='Search...'></input>
+          <span id='classified-ads-search-btn'>
+          <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#004c9b"}} />
+          </span>
         </div>
         <span id='classified-ads-filter-btn' onClick={handleFilterToggle}>
           <FontAwesomeIcon icon={faSliders} style={{color: "#FFF"}} />
@@ -97,28 +99,28 @@ function ClassifiedAds() {
               <div id='filter-items-wanted'>
                 <input type='checkbox' id='items-wanted' name='wanted' checked={categories.wanted}
                   onChange={(e) => setCategories({...categories, wanted: e.target.checked})}></input>
-                <label for="items-wanted">Items wanted</label>
+                <label htmlFor="items-wanted">Items wanted</label>
               </div>
               <div id='filter-items-for-sale'>
                 <input type='checkbox' id='items-for-sale' name='forSale' checked={categories.forSale}
                   onChange={(e) => setCategories({...categories, forSale: e.target.checked})}></input>
-                <label for="items-for-sale">Items for sale</label>
+                <label htmlFor="items-for-sale">Items for sale</label>
               </div>
               <div id='filter-items-wanted'>
                 <input type='checkbox' id='academic-services' name='academicServices' checked={categories.academicService}
                   onChange={(e) => setCategories({...categories, academicService: e.target.checked})}></input>
-                <label for="academic-services">Academic services</label>
+                <label htmlFor="academic-services">Academic services</label>
               </div>
             </div>
             <span className='filter-options-header'>Price</span>
             <div id='filter-price'>
               <div id='filter-min-price'>
-                <label for="min-price">Min</label>
+                <label htmlFor="min-price">Min</label>
                 <input type='number' id='min-price' name='minPrice' value={priceRange.min}
                   onChange={(e) => setPriceRange({...priceRange, min: e.target.value})}></input>
               </div>
               <div id='filter-max-price'>
-                <label for="max-price">Max</label>
+                <label htmlFor="max-price">Max</label>
                 <input type='number' id='max-price' name='maxPrice' value={priceRange.max}
                   onChange={(e) => setPriceRange({...priceRange, max: e.target.value})}></input>
               </div>
@@ -150,8 +152,8 @@ function ClassifiedAds() {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             {listingItems.map((item) => (
-              <Grid item xs={6} sm={4} md={3} lg={2}>
-                <Card sx={{ maxWidth: 345 }} style={{
+              <Grid key={item.id} item xs={4} sm={3} md={3} lg={2}>
+                <Card className='listing-cards' sx={{ maxWidth: 345 }} style={{
                     boxShadow: '2px 2px 6px 2px rgba(0,0,0,0.14)'
                   }}>
                   <CardActionArea>
@@ -163,16 +165,16 @@ function ClassifiedAds() {
                       // alt="green iguana"
                     />
                     <CardContent>
-                      <Typography variant="body2" color="#004c9b" fontFamily={'Montserrat'} fontWeight={500}>
+                      <Typography variant="body2" color="#004c9b" fontFamily={'Montserrat'} fontWeight={500} fontSize={'1em'}>
                         {item.listing_type}
                       </Typography>
-                      <Typography variant="subtitle2" fontFamily={'Montserrat'}>
+                      <Typography variant="subtitle2" fontFamily={'Montserrat'} fontSize={'1em'}>
                         {item.listing_title}
                       </Typography>
-                      <Typography variant="body2" fontFamily={'Montserrat'} color="#999">
+                      <Typography variant="body2" fontFamily={'Montserrat'} color="#999" fontSize={'1em'}>
                         {item.location}
                       </Typography>
-                      <Typography variant="body2" fontFamily={'Montserrat'}>
+                      <Typography variant="body2" fontFamily={'Montserrat'} fontSize={'1em'}>
                         ${item.price}
                       </Typography>
                     </CardContent>
