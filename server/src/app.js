@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(cors());
 
 //Routers
-app.use('/listings', listingsRouter);
+app.use('/api/listings', listingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

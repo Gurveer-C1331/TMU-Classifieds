@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -26,37 +26,43 @@ function ClassifiedAdsListings() {
   let categoryQuery = query.get('category') ? query.get('category').split(',') : null;
   let minPriceQuery = query.get('minPrice');
   let maxPriceQuery = query.get('maxPrice');
-
-  const listingItems = [
-    {id: 1, listing_title: 'Product title', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: 50, description: 'text'},
-    {id: 2, listing_title: 'Product title', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 50, description: 'text'},
-    {id: 3, listing_title: 'Product title', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 50, description: 'text'},
-    {id: 4, listing_title: 'Product title', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 50, description: 'text'},
-    {id: 5, listing_title: 'Product title', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: 50, description: 'text'},
-    {id: 6, listing_title: 'Product title', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 50, description: 'text'},
-    {id: 7, listing_title: 'Product title', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: 50, description: 'text'},
-    {id: 8, listing_title: 'Product title', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 50, description: 'text'},
-  ];
-
-  const [toggleFilters, setToggleFilters] = React.useState(false);
-  const [categories, setCategories] = React.useState({
+  
+  const [listingItems, setlistingItems] = useState([]);
+  const [toggleFilters, setToggleFilters] = useState(false);
+  const [categories, setCategories] = useState({
     wanted: categoryQuery ? categoryQuery.includes('wanted') : false,
     forSale: categoryQuery ? categoryQuery.includes('forSale') : false,
     academicService: categoryQuery ? categoryQuery.includes('academicService') : false,
   });
-  const [appliedCategories, setAppliedCategories] = React.useState({
+  const [appliedCategories, setAppliedCategories] = useState({
     wanted: categoryQuery ? categoryQuery.includes('wanted') : false,
     forSale: categoryQuery ? categoryQuery.includes('forSale') : false,
     academicService: categoryQuery ? categoryQuery.includes('academicService') : false,
   });
-  const [appliedPriceRange, setAppliedPriceRange] = React.useState({
+  const [appliedPriceRange, setAppliedPriceRange] = useState({
     min: minPriceQuery ? minPriceQuery : 0,
     max: maxPriceQuery ? maxPriceQuery : 100000
   });
-  const [priceRange, setPriceRange] = React.useState({
+  const [priceRange, setPriceRange] = useState({
     min: minPriceQuery ? minPriceQuery : 0,
     max: maxPriceQuery ? maxPriceQuery : 100000
   });
+
+  useEffect(() => {
+    //retrieve all listing items from server
+    const fetchLisitingItems = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/listings`, {
+          method: 'GET'
+        })
+          .then((response) => response.json())
+          .then((data) => setlistingItems(data));
+      } catch (error) {
+        console.error("Error fetching classified listings data:", error);
+      }
+    };
+    fetchLisitingItems();
+  }, []);
   
   /*
   * Handles filter toggle button click event
