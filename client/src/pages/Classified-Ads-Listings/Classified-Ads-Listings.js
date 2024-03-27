@@ -180,7 +180,7 @@ function ClassifiedAdsListings() {
       </div>
 
       <div id='classified-ads-listing-info'>
-        <span id='listing-total-count'>48 Listings</span>
+        <span id='listing-total-count'>{listingItems.length} Listings</span>
         {/* <div id='listing-filters-applied'>
           <span>
             Items wanted
@@ -191,7 +191,7 @@ function ClassifiedAdsListings() {
             <FontAwesomeIcon className='filter-applied-x' icon={faXmark} style={{color: "#FFF"}} />
           </span>
         </div> */}
-        <span id='listing-page-number'>Page 1 of 4</span>
+        {/* <span id='listing-page-number'>Page 1 of 1</span> */}
       </div>
 
       <div id='classified-ads-listing-container'>
@@ -222,7 +222,7 @@ function ClassifiedAdsListings() {
                           {item.location}
                         </Typography>
                         <Typography variant="body2" fontFamily={'Montserrat'} fontSize={'1em'}>
-                          ${item.price}
+                          {item.listing_type === 'Item wanted' ? '' : '$' + item.price}
                         </Typography>
                       </CardContent>
                     </CardActionArea>

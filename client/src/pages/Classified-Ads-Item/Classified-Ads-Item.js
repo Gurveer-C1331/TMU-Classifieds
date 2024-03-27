@@ -43,7 +43,7 @@ function ClassifiedAdsItem() {
         <div id='item-info-container'>
           <h1 id='item-title'>{listingItem.listing_title}</h1>
           <span id='item-listing-type'>{listingItem.listing_type}</span><br></br>
-          <span id='item-price'>${listingItem.price}</span><br></br>
+          <span id='item-price'>{listingItem.listing_type === 'Item wanted' ? '' : '$' + listingItem.price}</span><br></br>
           <FontAwesomeIcon icon={faLocationDot} style={{color: "#004c9b"}} />
           <span id='item-location'>{listingItem.location}</span>
 
