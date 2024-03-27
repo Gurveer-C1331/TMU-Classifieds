@@ -1,0 +1,96 @@
+#classified-ads-item {
+  padding: 0 8em;
+  display: flex;
+}
+
+#item-image-container {
+  border: 1px solid #004c9b;
+}
+
+#item-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#item-info-container {
+  margin-left: 4em;
+}
+
+#item-title {
+  margin: 0;
+}
+
+#item-listing-type {
+  display: inline-block;
+  color: #004c9b;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+
+#item-price {
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+
+#item-location {
+  color: #999;
+  font-size: 0.9em;
+  margin-left: 0.4em;
+}
+
+#item-lister-contact {
+  margin: 2em 0;
+}
+
+#item-lister {
+  font-weight: 500;
+}
+
+#send-message-btn {
+  padding: 1em 4em;
+  margin-top: 1em;
+  background-color: #004c9b;
+  color: #FFF;
+  border-radius: 50px;
+  font-size: 0.8em;
+  border: none;
+}
+
+#item-description {
+  font-size: 0.9em;
+}
+
+@media (max-width: 900px) {
+  #classified-ads-item {
+    padding: 0 4em;
+  }
+
+  #item-image-container {
+    height: 20em;
+  }
+
+  #item-info-container {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 750px) {
+  #classified-ads-item {
+    font-size: 0.9em
+  }
+}
+
+@media (max-width: 600px) {
+
+}
+
+@media (max-width: 500px) {
+
+  #classified-ads-item {
+    font-size: 0.8em;
+    padding: 0 2em;
+  } 
+}

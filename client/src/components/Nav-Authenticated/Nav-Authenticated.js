@@ -121,7 +121,7 @@ function NavAuthenticated() {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose} disableRipple>
-            <Link className='nav-btn' to='/'>Classified Ads</Link>
+            <Link className='nav-btn' to='/classified-ads'>Classified Ads</Link>
           </MenuItem>
           <MenuItem onClick={handleClose} disableRipple>
             <Link className='nav-btn' to='/'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></Link>
