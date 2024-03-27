@@ -6,14 +6,27 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faSliders, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './Classified-Ads-Listings.css';
 import ListingImage from '../../assets/listing-image.svg';
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
 
 function ClassifiedAdsListings() {
+  let query = useQuery();
+  let navigate = useNavigate();
+
+  //initialize URL query parameters
+  let categoryQuery = query.get('category') ? query.get('category').split(',') : null;
+  let minPriceQuery = query.get('minPrice');
+  let maxPriceQuery = query.get('maxPrice');
+
   const listingItems = [
     {id: 1, listing_title: 'Product title', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: 50, description: 'text'},
     {id: 2, listing_title: 'Product title', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 50, description: 'text'},
@@ -27,24 +40,27 @@ function ClassifiedAdsListings() {
 
   const [toggleFilters, setToggleFilters] = React.useState(false);
   const [categories, setCategories] = React.useState({
-    wanted: false,
-    forSale: false,
-    academicService: false
+    wanted: categoryQuery ? categoryQuery.includes('wanted') : false,
+    forSale: categoryQuery ? categoryQuery.includes('forSale') : false,
+    academicService: categoryQuery ? categoryQuery.includes('academicService') : false,
   });
   const [appliedCategories, setAppliedCategories] = React.useState({
-    wanted: false,
-    forSale: false,
-    academicService: false
+    wanted: categoryQuery ? categoryQuery.includes('wanted') : false,
+    forSale: categoryQuery ? categoryQuery.includes('forSale') : false,
+    academicService: categoryQuery ? categoryQuery.includes('academicService') : false,
   });
   const [appliedPriceRange, setAppliedPriceRange] = React.useState({
-    min: 0,
-    max: 100000
+    min: minPriceQuery ? minPriceQuery : 0,
+    max: maxPriceQuery ? maxPriceQuery : 100000
   });
   const [priceRange, setPriceRange] = React.useState({
-    min: 0,
-    max: 100000
+    min: minPriceQuery ? minPriceQuery : 0,
+    max: maxPriceQuery ? maxPriceQuery : 100000
   });
   
+  /*
+  * Handles filter toggle button click event
+  */
   const handleFilterToggle = (e) => {
     setToggleFilters(!toggleFilters);
 
@@ -54,6 +70,9 @@ function ClassifiedAdsListings() {
     }
   }
 
+  /*
+  * Handles 'Clear' button click event
+  */
   const handleFilterClear = (e) => {
     e.preventDefault();
     setCategories({
@@ -67,13 +86,33 @@ function ClassifiedAdsListings() {
     });
   };
 
+  /*
+  * Handles 'Apply' button click event
+  */
   const handleFilterApply = (e) => {
     e.preventDefault();
     setAppliedCategories(categories);
     setAppliedPriceRange(priceRange);
-    // console.log(categories);
-    // console.log(priceRange);
+    
+    updateQueryParam();
   };
+
+  /*
+  * Updates the URL query parameters
+  */
+  const updateQueryParam = () => {
+
+    let tempCatQuery = [];
+    
+    if (categories.wanted) tempCatQuery.push('wanted');
+    if (categories.forSale) tempCatQuery.push('forSale');
+    if (categories.academicService) tempCatQuery.push('academicService');
+    categoryQuery = tempCatQuery;
+    minPriceQuery = priceRange.min;
+    maxPriceQuery = priceRange.max;
+
+    navigate(`?category=${categoryQuery}&minPrice=${minPriceQuery}&maxPrice=${maxPriceQuery}`);
+  }
 
   return (
     <div id='classified-ads'>
