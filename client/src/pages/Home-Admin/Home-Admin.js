@@ -2,19 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import './Home-Authenticated.css';
+import './Home-Admin.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ListingImage from '../../assets/listing-image.svg';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 
-function HomeAuthenticated() {
+function HomeAdmin() {
 
   return (
     <div id='home-page'>
       <div id='home-page-heading'>
         <h1>Welcome back, John!</h1>
         <span id='page-subheading'>And a subheading describing your site, too</span><br></br>
+      </div>
+
+      <div id='home-page-quick-admin-info-section'>
+
       </div>
 
       <div id='home-page-info-container'>
@@ -26,9 +30,9 @@ function HomeAuthenticated() {
               <Grid item md={5} style={{
                 margin: 'auto'
               }}>
-                <h2>Items wanted</h2>
+                <h2>Dashboard</h2>
                 <p>A subheading for this section, as long or as short as you like</p>
-                <Link className='navigte-btn' to='/classified-ads?category=wanted'>
+                <Link className='navigte-btn' to='/'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
               </Grid>
@@ -45,9 +49,9 @@ function HomeAuthenticated() {
               <Grid item md={5} style={{
                 margin: 'auto'
               }}>
-                <h2>Items for sale</h2>
+                <h2>Users</h2>
                 <p>A subheading for this section, as long or as short as you like</p>
-                <Link className='navigte-btn' to='/classified-ads?category=forSale'>
+                <Link className='navigte-btn' to='/'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
               </Grid>
@@ -58,9 +62,9 @@ function HomeAuthenticated() {
               <Grid item md={5} style={{
                 margin: 'auto'
               }}>
-                <h2>Academic services</h2>
+                <h2>Classified Ads</h2>
                 <p>A subheading for this section, as long or as short as you like</p>
-                <Link className='navigte-btn' to='/classified-ads?category=academicService'>
+                <Link className='navigte-btn' to='/'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
               </Grid>
@@ -84,7 +88,7 @@ function HomeAuthenticated() {
               <Grid item md={5} style={{
                 margin: 'auto'
               }}>
-                <h2>Items wanted</h2>
+                <h2>Dashboard</h2>
                 <p>A subheading for this section, as long or as short as you like</p>
                 <Link className='navigte-btn' to='/classified-ads?category=wanted'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
@@ -102,7 +106,7 @@ function HomeAuthenticated() {
               <Grid item md={5} style={{
                 margin: 'auto'
               }}>
-                <h2>Items for sale</h2>
+                <h2>Users</h2>
                 <p>A subheading for this section, as long or as short as you like</p>
                 <Link className='navigte-btn' to='/classified-ads?category=forSale'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
@@ -120,7 +124,7 @@ function HomeAuthenticated() {
               <Grid item md={5} style={{
                 margin: 'auto'
               }}>
-                <h2>Academic services</h2>
+                <h2>Classified Ads</h2>
                 <p>A subheading for this section, as long or as short as you like</p>
                 <Link className='navigte-btn' to='/classified-ads?category=academicService'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
@@ -134,4 +138,4 @@ function HomeAuthenticated() {
   );
 }
 
-export default HomeAuthenticated;
+export default HomeAdmin;
