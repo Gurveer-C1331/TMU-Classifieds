@@ -20,8 +20,8 @@ function App() {
       
       <Routes>
         {/* <Route exact path='/' element={<Home></Home>}></Route> */}
-        {/* <Route exact path='/' element={<HomeAuthenticated></HomeAuthenticated>}></Route> */}
-        <Route exact path='/' element={<HomeAdmin></HomeAdmin>}></Route>
+        <Route exact path='/' element={<HomeAuthenticated></HomeAuthenticated>}></Route>
+        {/* <Route exact path='/' element={<HomeAdmin></HomeAdmin>}></Route> */}
         <Route exact path='/classified-ads' element={<ClassifiedAdsCatalog></ClassifiedAdsCatalog>}></Route>
         <Route exact path='/classified-ads/:listing-id' element={<ClassifiedAdsItem></ClassifiedAdsItem>}></Route>
       </Routes>
