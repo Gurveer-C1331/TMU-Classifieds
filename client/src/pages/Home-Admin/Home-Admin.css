@@ -1,0 +1,16 @@
+.navigte-btn {
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 20px;
+  background: #004c9b;
+  color: #FFF;
+  font-size: 0.8em;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .home-page-info-section p {
+    margin-bottom: 2em;
+  }
+}
