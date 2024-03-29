@@ -5,10 +5,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faSliders, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faSliders } from '@fortawesome/free-solid-svg-icons';
 import './Classified-Ads-Listings.css';
 import ListingImage from '../../assets/listing-image.svg';
 
@@ -181,16 +181,6 @@ function ClassifiedAdsListings() {
 
       <div id='classified-ads-listing-info'>
         <span id='listing-total-count'>{listingItems.length} Listings</span>
-        {/* <div id='listing-filters-applied'>
-          <span>
-            Items wanted
-            <FontAwesomeIcon className='filter-applied-x' icon={faXmark} style={{color: "#FFF"}} />
-          </span>
-          <span>
-            $50 - $100
-            <FontAwesomeIcon className='filter-applied-x' icon={faXmark} style={{color: "#FFF"}} />
-          </span>
-        </div> */}
         {/* <span id='listing-page-number'>Page 1 of 1</span> */}
       </div>
 
