@@ -28,7 +28,7 @@ function ClassifiedAdsItem() {
       }
     };
     fetchLisitingItem();
-  }, []);
+  }, [listingItemId]);
 
   let listingItemDom = null;
   if (listingItem) {
@@ -36,7 +36,7 @@ function ClassifiedAdsItem() {
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
         <div id='item-image-container'>
-          <img src={ListingImage}></img>
+          <img src={ListingImage} alt={listingItem.listing_title}></img>
         </div>
       </Grid>
       <Grid item xs={12} md={6}>
