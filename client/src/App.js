@@ -5,6 +5,7 @@ import './App.css';
 
 import Nav from './components/Nav/Nav';
 import NavAuthenticated from './components/Nav-Authenticated/Nav-Authenticated';
+import NavAdmin from './components/Nav-Admin/Nav-Admin';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import HomeAuthenticated from './pages/Home-Authenticated/Home-Authenticated';
@@ -16,7 +17,8 @@ function App() {
   return (
     <div className="App">
       {/* <Nav></Nav> */}
-      <NavAuthenticated></NavAuthenticated>
+      {/* <NavAuthenticated></NavAuthenticated> */}
+      <NavAdmin></NavAdmin>
       
       <Routes>
         {/* <Route exact path='/' element={<Home></Home>}></Route> */}

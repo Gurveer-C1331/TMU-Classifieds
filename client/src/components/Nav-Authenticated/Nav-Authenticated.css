@@ -19,7 +19,7 @@
   border-radius: 20px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   #profile-image {
     display: block;
     margin: 0 auto;
