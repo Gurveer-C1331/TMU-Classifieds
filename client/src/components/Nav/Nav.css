@@ -33,7 +33,7 @@ header {
   border-radius: 10px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   header {
       font-size: 1em;
   }
