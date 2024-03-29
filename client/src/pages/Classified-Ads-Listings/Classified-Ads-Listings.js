@@ -5,6 +5,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import { CardActionArea } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -49,6 +51,10 @@ function ClassifiedAdsListings() {
     min: minPriceQuery ? minPriceQuery : 0,
     max: maxPriceQuery ? maxPriceQuery : 100000
   });
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
   useEffect(() => {
     //retrieve all listing items from server
@@ -235,6 +241,16 @@ function ClassifiedAdsListings() {
             ))}
           </Grid>
         </Box>
+      </div>
+
+      <div id='classified-ads-pagination'>
+        <Stack spacing={2} style={{
+            alignItems: 'center'
+          }}>
+          <Pagination id='pagination-sm' count={10} page={page} boundaryCount={2} size='small' onChange={handleChange}/>
+          <Pagination id='pagination-md' count={10} page={page} boundaryCount={2} size='' onChange={handleChange}/>
+          <Pagination id='pagination-lg' count={10} page={page} boundaryCount={2} size='large'  color='primary' onChange={handleChange}/>
+        </Stack>
       </div>
     </div>
   );

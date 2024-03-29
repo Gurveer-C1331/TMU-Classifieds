@@ -144,6 +144,28 @@
   font-size: 1em;
 }
 
+#classified-ads-pagination {
+  padding: 4em 0;
+}
+
+@media (min-width: 800px) {
+  #pagination-sm, #pagination-md {
+    display: none;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 799px) {
+  #pagination-sm, #pagination-lg {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  #pagination-md, #pagination-lg {
+    display: none;
+  }
+}
+
 @media (max-width: 900px) {
   #classified-ads {
     padding: 0 4em;
