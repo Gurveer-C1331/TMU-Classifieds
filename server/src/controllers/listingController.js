@@ -41,6 +41,13 @@ const testData = [
 // Return all listings.
 exports.allListings_get = asyncHandler(async (req, res, next) => {
 
+  const searchQuery = req.params.search === 'null' ? '' : req.params.search;
+  const categoryFilter = req.params.category === 'null' ? [] : req.params.category.split(',');
+  const priceFilter = {
+    min: req.params.minPrice === 'null' ? 0 : parseInt(req.params.minPrice),
+    max: req.params.maxPrice === 'null' ? 100000 : parseInt(req.params.maxPrice)
+  };
+
   res.json(testData);
   // try {
   //   const listings = await Listing.find({});
