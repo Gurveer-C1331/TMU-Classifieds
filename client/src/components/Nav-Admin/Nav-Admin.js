@@ -6,7 +6,7 @@ import tmuLogo from '../../assets/tmu-logo.svg';
 import '../Nav/Nav.css';
 import './Nav-Admin.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faLock, faMessage, faPlus, faUser} from '@fortawesome/free-solid-svg-icons'
+import { faBars, faUser} from '@fortawesome/free-solid-svg-icons'
 
 const StyledBtn = styled((props) => (
   <Button

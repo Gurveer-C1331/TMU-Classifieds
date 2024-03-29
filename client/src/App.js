@@ -17,8 +17,8 @@ function App() {
   return (
     <div className="App">
       {/* <Nav></Nav> */}
-      {/* <NavAuthenticated></NavAuthenticated> */}
-      <NavAdmin></NavAdmin>
+      <NavAuthenticated></NavAuthenticated>
+      {/* <NavAdmin></NavAdmin> */}
       
       <Routes>
         {/* <Route exact path='/' element={<Home></Home>}></Route> */}
