@@ -11,10 +11,10 @@ import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 function HomeAdmin() {
 
   return (
-    <div id='home-page'>
+    <div id='home-page' className='main-page-container'>
       <div id='home-page-heading'>
         <h1>Welcome back, John!</h1>
-        <span id='page-subheading'>And a subheading describing your site, too</span><br></br>
+        <span className='subtitle-text'>And a subheading describing your site, too</span><br></br>
       </div>
 
       <div id='home-page-quick-admin-info-section'>
@@ -31,8 +31,8 @@ function HomeAdmin() {
                 margin: 'auto'
               }}>
                 <h2>Dashboard</h2>
-                <p>A subheading for this section, as long or as short as you like</p>
-                <Link className='navigte-btn' to='/'>
+                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <Link className='primary-button' to='/'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
               </Grid>
@@ -50,8 +50,8 @@ function HomeAdmin() {
                 margin: 'auto'
               }}>
                 <h2>Users</h2>
-                <p>A subheading for this section, as long or as short as you like</p>
-                <Link className='navigte-btn' to='/'>
+                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <Link className='primary-button' to='/'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
               </Grid>
@@ -63,8 +63,8 @@ function HomeAdmin() {
                 margin: 'auto'
               }}>
                 <h2>Classified Ads</h2>
-                <p>A subheading for this section, as long or as short as you like</p>
-                <Link className='navigte-btn' to='/'>
+                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <Link className='primary-button' to='/'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
               </Grid>
@@ -89,8 +89,8 @@ function HomeAdmin() {
                 margin: 'auto'
               }}>
                 <h2>Dashboard</h2>
-                <p>A subheading for this section, as long or as short as you like</p>
-                <Link className='navigte-btn' to='/classified-ads?category=wanted'>
+                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <Link className='primary-button' to='/classified-ads?category=wanted'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
               </Grid>
@@ -107,8 +107,8 @@ function HomeAdmin() {
                 margin: 'auto'
               }}>
                 <h2>Users</h2>
-                <p>A subheading for this section, as long or as short as you like</p>
-                <Link className='navigte-btn' to='/classified-ads?category=forSale'>
+                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <Link className='primary-button' to='/classified-ads?category=forSale'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
               </Grid>
@@ -125,8 +125,8 @@ function HomeAdmin() {
                 margin: 'auto'
               }}>
                 <h2>Classified Ads</h2>
-                <p>A subheading for this section, as long or as short as you like</p>
-                <Link className='navigte-btn' to='/classified-ads?category=academicService'>
+                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <Link className='primary-button' to='/classified-ads?category=academicService'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
               </Grid>
