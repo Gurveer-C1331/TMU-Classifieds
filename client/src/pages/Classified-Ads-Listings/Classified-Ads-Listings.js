@@ -121,10 +121,10 @@ function ClassifiedAdsListings() {
   }
 
   return (
-    <div id='classified-ads'>
+    <div id='classified-ads' className='main-page-container'>
       <div id='classified-ads-heading'>
         <h1>Classified Ads</h1>
-        <span id='page-subheading'>What are you looking for today?</span>
+        <span className='subtitle-text'>What are you looking for today?</span>
       </div>
 
       <div id='classified-ads-toolbar'>

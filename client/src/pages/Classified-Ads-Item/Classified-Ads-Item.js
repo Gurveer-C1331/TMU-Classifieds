@@ -61,7 +61,7 @@ function ClassifiedAdsItem() {
   }
 
   return (
-    <div id='classified-ads-item'>
+    <div id='classified-ads-item' className='main-page-container'>
       <Box sx={{ flexGrow: 1 }}>
         {listingItemDom}
       </Box>

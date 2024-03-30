@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
 
 import './App.css';
+import './theme.css';
 
 import Nav from './components/Nav/Nav';
 import NavAuthenticated from './components/Nav-Authenticated/Nav-Authenticated';

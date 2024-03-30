@@ -1,5 +1,4 @@
 #classified-ads-item {
-  padding: 0 8em;
   display: flex;
 }
 
@@ -64,10 +63,6 @@
 }
 
 @media (max-width: 900px) {
-  #classified-ads-item {
-    padding: 0 4em;
-  }
-
   #item-image-container {
     height: 20em;
   }
@@ -75,22 +70,4 @@
   #item-info-container {
     margin-left: 0;
   }
-}
-
-@media (max-width: 750px) {
-  #classified-ads-item {
-    font-size: 0.9em
-  }
-}
-
-@media (max-width: 600px) {
-
-}
-
-@media (max-width: 500px) {
-
-  #classified-ads-item {
-    font-size: 0.8em;
-    padding: 0 2em;
-  } 
 }
