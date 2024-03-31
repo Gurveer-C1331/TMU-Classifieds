@@ -1,0 +1,27 @@
+@media (max-width: 900px)
+{
+  .home-page-info-section p
+  {
+    margin-bottom: 2em;
+  }
+}
+
+.number
+{
+  text-align: center;
+  color: #004c9b;
+  font-size: xx-large;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.sm-text
+{
+  text-align: center;
+  color: #004c9b;
+  font-size: small;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
