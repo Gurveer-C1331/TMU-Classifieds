@@ -24,7 +24,7 @@ function AdminDashboard()
 
       <div id='home-page-info-container'>
         <div className='home-page-info-section' id='lg-info-section'>
-          <Grid container spacing={2} justifyContent="center">
+          <Grid container spacing={2} justifyContent="center" textAlign="center">
             <Grid item md={0.75}>
               <p>Wanted</p>
             </Grid>
@@ -37,7 +37,7 @@ function AdminDashboard()
 
           </Grid>
 
-          <Grid container spacing={2} justifyContent="center">
+          <Grid container spacing={2} justifyContent="center" textAlign="center">
             <Grid item md={0.75}>
               <p class="number">23</p>
               <p class="sm-text">listings</p>
