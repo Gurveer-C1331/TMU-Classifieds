@@ -13,6 +13,8 @@ function AdPostingInterface() {
             <br></br>
             <br></br>
             <br></br>
+            <br></br>
+            <br></br>
             <p>Drag & drop an image here</p>
             <p>or</p>
             <input type="file" id="image" name="image" accept="image/*" />

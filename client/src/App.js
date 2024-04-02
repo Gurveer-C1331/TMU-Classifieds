@@ -15,6 +15,7 @@ import ClassifiedAdsCatalog from './pages/Classified-Ads-Listings/Classified-Ads
 import ClassifiedAdsItem from './pages/Classified-Ads-Item/Classified-Ads-Item';
 import NewAd from './pages/New-Ad/posting';
 import CommsPlatform from './pages/Communication/Communication';
+import OldChats from './pages/Communication/Old-Chats';
 function App() {
   return (
     <div className="App">
@@ -30,6 +31,7 @@ function App() {
         <Route exact path='/classified-ads/:listing-id' element={<ClassifiedAdsItem></ClassifiedAdsItem>}></Route>
         <Route exact path='/New-Ad' element={<NewAd></NewAd>}></Route>
         <Route exact path='/Comms' element={<CommsPlatform></CommsPlatform>}></Route>
+        <Route exact path='/Old-Chats' element={<OldChats></OldChats>}></Route>
       </Routes>
       <Outlet></Outlet>
 
