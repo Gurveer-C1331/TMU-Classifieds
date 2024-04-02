@@ -5,6 +5,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import { CardActionArea } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,12 +25,14 @@ function ClassifiedAdsListings() {
   let navigate = useNavigate();
 
   //initialize URL query parameters
+  let searchQuery = query.get('search') ? query.get('search') : null;
   let categoryQuery = query.get('category') ? query.get('category').split(',') : null;
-  let minPriceQuery = query.get('minPrice');
-  let maxPriceQuery = query.get('maxPrice');
+  let minPriceQuery = query.get('minPrice') ? query.get('minPrice') : null;
+  let maxPriceQuery = query.get('maxPrice') ? query.get('maxPrice') : null;
   
   const [listingItems, setlistingItems] = useState([]);
   const [toggleFilters, setToggleFilters] = useState(false);
+  const [searchString, setSearchString] = useState(searchQuery ? searchQuery : '');
   const [categories, setCategories] = useState({
     wanted: categoryQuery ? categoryQuery.includes('wanted') : false,
     forSale: categoryQuery ? categoryQuery.includes('forSale') : false,
@@ -47,12 +51,16 @@ function ClassifiedAdsListings() {
     min: minPriceQuery ? minPriceQuery : 0,
     max: maxPriceQuery ? maxPriceQuery : 100000
   });
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
   useEffect(() => {
     //retrieve all listing items from server
     const fetchLisitingItems = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/listings`, {
+        const response = await fetch(`http://localhost:3001/api/listings/${searchQuery}-${categoryQuery}-${minPriceQuery}-${maxPriceQuery}`, {
           method: 'GET'
         })
           .then((response) => response.json())
@@ -62,7 +70,7 @@ function ClassifiedAdsListings() {
       }
     };
     fetchLisitingItems();
-  }, []);
+  }, [searchQuery, categoryQuery ? categoryQuery.length : null, minPriceQuery, maxPriceQuery]);
   
   /*
   * Handles filter toggle button click event
@@ -104,6 +112,16 @@ function ClassifiedAdsListings() {
   };
 
   /*
+  * Handle search button click event
+  */
+  const handleSearchClick = (e) => {
+    e.preventDefault();
+    searchQuery = searchString;
+
+    updateQueryParam();
+  }
+
+  /*
   * Updates the URL query parameters
   */
   const updateQueryParam = () => {
@@ -117,7 +135,7 @@ function ClassifiedAdsListings() {
     minPriceQuery = priceRange.min;
     maxPriceQuery = priceRange.max;
 
-    navigate(`?category=${categoryQuery}&minPrice=${minPriceQuery}&maxPrice=${maxPriceQuery}`);
+    navigate(`?search=${searchQuery ? searchQuery : ''}&category=${categoryQuery}&minPrice=${minPriceQuery}&maxPrice=${maxPriceQuery}`);
   }
 
   return (
@@ -129,8 +147,9 @@ function ClassifiedAdsListings() {
 
       <div id='classified-ads-toolbar'>
         <div id='classified-ads-search'>
-          <input id='classified-ads-searchbar' placeholder='Search...'></input>
-          <span id='classified-ads-search-btn'>
+          <input id='classified-ads-searchbar' placeholder='Search...' value={searchString}
+            onChange={(e) => setSearchString(e.target.value)}></input>
+          <span id='classified-ads-search-btn' onClick={handleSearchClick}>
           <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#004c9b"}} />
           </span>
         </div>
@@ -222,6 +241,16 @@ function ClassifiedAdsListings() {
             ))}
           </Grid>
         </Box>
+      </div>
+
+      <div id='classified-ads-pagination'>
+        <Stack spacing={2} style={{
+            alignItems: 'center'
+          }}>
+          <Pagination id='pagination-sm' count={10} page={page} boundaryCount={2} size='small' onChange={handleChange}/>
+          <Pagination id='pagination-md' count={10} page={page} boundaryCount={2} size='' onChange={handleChange}/>
+          <Pagination id='pagination-lg' count={10} page={page} boundaryCount={2} size='large'  color='primary' onChange={handleChange}/>
+        </Stack>
       </div>
     </div>
   );
