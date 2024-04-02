@@ -1,14 +1,5 @@
-#classified-ads {
-  padding: 0 8em;
-}
-
 #classified-ads-heading {
   text-align: center;
-}
-
-#page-subheading {
-  font-size: 0.9em;
-  color: #999;
 }
 
 #classified-ads-toolbar {
@@ -166,17 +157,7 @@
   }
 }
 
-@media (max-width: 900px) {
-  #classified-ads {
-    padding: 0 4em;
-  }  
-}
-
 @media (max-width: 750px) {
-  #classified-ads {
-    font-size: 0.9em
-  }  
-
   #classified-ads-searchbar {
     width: 16em;
   }
@@ -205,12 +186,6 @@
 }
 
 @media (max-width: 500px) {
-
-  #classified-ads {
-    font-size: 0.8em;
-    padding: 0 2em;
-  } 
-
   #classified-ads-searchbar {
     width: 8em;
   }
