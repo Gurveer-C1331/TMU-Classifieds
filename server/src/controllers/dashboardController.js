@@ -29,3 +29,8 @@ exports.allUsers_get = asyncHandler(async (req, res, next) =>
         res.status(500).send({ error: "Error occurred retrieving users." });
     }
 });
+
+exports.deleteUser = asyncHandler(async (req, res, next) =>
+{
+
+});
