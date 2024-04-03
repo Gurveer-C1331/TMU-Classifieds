@@ -77,7 +77,7 @@ function ClassifiedAdsListings() {
       }
     };
     fetchLisitingItems();
-  }, [searchQuery, categoryQuery ? categoryQuery.length : null, minPriceQuery, maxPriceQuery, page]);
+  }, [searchQuery, categoryQuery ? categoryQuery.length : null, categoryQuery ? categoryQuery[0] : null, minPriceQuery, maxPriceQuery, page]);
   
   /*
   * Handles filter toggle button click event
