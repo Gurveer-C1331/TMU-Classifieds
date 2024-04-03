@@ -12,7 +12,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faSliders } from '@fortawesome/free-solid-svg-icons';
 import './Classified-Ads-Listings.css';
-import ListingImage from '../../assets/listing-image.svg';
+import ItemWantedImage from '../../assets/announce.jpg';
+import ItemForSaleImage from '../../assets/on-sale.jpg';
+import AcademicServiceImage from '../../assets/library.jpg';
 
 function useQuery() {
   const { search } = useLocation();
@@ -75,7 +77,7 @@ function ClassifiedAdsListings() {
       }
     };
     fetchLisitingItems();
-  }, [searchQuery, categoryQuery ? categoryQuery.length : null, minPriceQuery, maxPriceQuery, page]);
+  }, [searchQuery, categoryQuery ? categoryQuery.length : null, categoryQuery ? categoryQuery[0] : null, minPriceQuery, maxPriceQuery, page]);
   
   /*
   * Handles filter toggle button click event
@@ -142,7 +144,7 @@ function ClassifiedAdsListings() {
 
     navigate(`?search=${searchQuery ? searchQuery : ''}&category=${categoryQuery}&minPrice=${minPriceQuery}&maxPrice=${maxPriceQuery}`);
   }
-
+  
   return (
     <div id='classified-ads' className='main-page-container'>
       <div id='classified-ads-heading'>
@@ -222,7 +224,9 @@ function ClassifiedAdsListings() {
                         component="img"
                         height="140"
                         // image={item.image}
-                        image={ListingImage}
+                        image={ item.category === 'Item wanted' && ItemWantedImage ||
+                        item.category === 'Item for sale' && ItemForSaleImage ||
+                        item.category === 'Academic service' && AcademicServiceImage }
                         // alt="green iguana"
                       />
                       <CardContent>
