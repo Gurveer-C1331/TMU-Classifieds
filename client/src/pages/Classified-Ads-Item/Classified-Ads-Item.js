@@ -5,7 +5,9 @@ import Grid from '@mui/material/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './Classified-Ads-Item.css';
-import ListingImage from '../../assets/listing-image.svg';
+import ItemWantedImage from '../../assets/announce.jpg';
+import ItemForSaleImage from '../../assets/on-sale.jpg';
+import AcademicServiceImage from '../../assets/library.jpg';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -62,7 +64,9 @@ function ClassifiedAdsItem() {
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
         <div id='item-image-container'>
-          <img src={ListingImage} alt={listingItem.ad.adName}></img>
+          <img src={ listingItem.category == 'Item wanted' && ItemWantedImage ||
+                    listingItem.category == 'Item for sale' && ItemForSaleImage ||
+                    listingItem.category == 'Academic service' && AcademicServiceImage } alt={listingItem.ad.adName}></img>
         </div>
       </Grid>
       <Grid item xs={12} md={6}>
