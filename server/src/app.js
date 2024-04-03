@@ -20,6 +20,9 @@ app.use(express.json());
 // Enable CORS for all origins
 app.use(cors());
 
+// Cookie Parser
+app.use(cookieParser());
+
 //Routers
 app.use('/api/listings', listingsRouter);
 
