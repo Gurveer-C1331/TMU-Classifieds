@@ -27,6 +27,7 @@ function App() {
         {/* <Route exact path='/' element={<HomeAdmin></HomeAdmin>}></Route> */}
         <Route exact path='/classified-ads' element={<ClassifiedAdsCatalog></ClassifiedAdsCatalog>}></Route>
         <Route exact path='/classified-ads/:listing-id' element={<ClassifiedAdsItem></ClassifiedAdsItem>}></Route>
+        <Route exact path='/register' element={<Register></Register>}></Route>
       </Routes>
       <Outlet></Outlet>
 

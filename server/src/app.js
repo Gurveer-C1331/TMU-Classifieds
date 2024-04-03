@@ -4,6 +4,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const app = express();
 const listingsRouter = require('./routes/listings');
+const cookieParser = require('cookie-parser');
 
 // Set up mongoose connection
 const mongoose = require("mongoose");
@@ -19,6 +20,9 @@ app.use(logger('dev'));
 app.use(express.json());
 // Enable CORS for all origins
 app.use(cors());
+
+// Cookie Parser
+app.use(cookieParser());
 
 //Routers
 app.use('/api/listings', listingsRouter);
