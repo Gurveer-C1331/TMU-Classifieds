@@ -1,70 +1,81 @@
-const Listing = require('../models/listing');
+const Ad = require('../models/adModel');
+const Category = require('../models/categoryModel');
+const User = require('../models/userModel');
 
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
-
-const testData = [
-  {id: 1, listing_title: 'Dune: Part Two poster', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 20, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'John', last_name: 'Doe'}},
-  {id: 2, listing_title: 'MTH110 tutoring', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 10, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Jane', last_name: 'Doe'}},
-  {id: 3, listing_title: 'PS3 controller', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 9.99, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Nick', last_name: 'Doe'}},
-  {id: 4, listing_title: 'Two pears', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 5.99, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Mike', last_name: 'Doe'}},
-  {id: 5, listing_title: 'Oppenheimer IMAX poster', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Cassie', last_name: 'Doe'}},
-  {id: 6, listing_title: '24in monitor', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 80, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Sabrina', last_name: 'Doe'}},
-  {id: 7, listing_title: 'CPS109 textbook', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Jonathan', last_name: 'Doe'}},
-  {id: 8, listing_title: 'CPS209 extra help', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 12, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Bryan', last_name: 'Doe'}},
-  {id: 9, listing_title: 'Dune: Part Two poster', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 20, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'John', last_name: 'Doe'}},
-  {id: 10, listing_title: 'MTH110 tutoring', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 10, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Jane', last_name: 'Doe'}},
-  {id: 11, listing_title: 'PS3 controller', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 9.99, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Nick', last_name: 'Doe'}},
-  {id: 12, listing_title: 'Two pears', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 5.99, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Mike', last_name: 'Doe'}},
-  {id: 13, listing_title: 'Oppenheimer IMAX poster', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Cassie', last_name: 'Doe'}},
-  {id: 14, listing_title: '24in monitor', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 80, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Sabrina', last_name: 'Doe'}},
-  {id: 15, listing_title: 'CPS109 textbook', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Jonathan', last_name: 'Doe'}},
-  {id: 16, listing_title: 'CPS209 extra help', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 12, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Bryan', last_name: 'Doe'}},
-  {id: 17, listing_title: 'Dune: Part Two poster', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 20, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'John', last_name: 'Doe'}},
-  {id: 18, listing_title: 'MTH110 tutoring', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 10, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Jane', last_name: 'Doe'}},
-  {id: 19, listing_title: 'PS3 controller', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 9.99, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Nick', last_name: 'Doe'}},
-  {id: 20, listing_title: 'Two pears', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 5.99, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Mike', last_name: 'Doe'}},
-  {id: 21, listing_title: 'Oppenheimer IMAX poster', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Cassie', last_name: 'Doe'}},
-  {id: 22, listing_title: '24in monitor', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 80, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Sabrina', last_name: 'Doe'}},
-  {id: 23, listing_title: 'CPS109 textbook', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Jonathan', last_name: 'Doe'}},
-  {id: 24, listing_title: 'CPS209 extra help', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 12, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Bryan', last_name: 'Doe'}},
-  {id: 25, listing_title: 'Dune: Part Two poster', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 20, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'John', last_name: 'Doe'}},
-  {id: 26, listing_title: 'MTH110 tutoring', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 10, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Jane', last_name: 'Doe'}},
-  {id: 27, listing_title: 'PS3 controller', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 9.99, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Nick', last_name: 'Doe'}},
-  {id: 28, listing_title: 'Two pears', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 5.99, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Mike', last_name: 'Doe'}},
-  {id: 29, listing_title: 'Oppenheimer IMAX poster', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Cassie', last_name: 'Doe'}},
-  {id: 30, listing_title: '24in monitor', image: '', listing_type: 'Item for sale', location: 'Toronto, ON', price: 80, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Sabrina', last_name: 'Doe'}},
-  {id: 31, listing_title: 'CPS109 textbook', image: '', listing_type: 'Item wanted', location: 'Toronto, ON', price: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Jonathan', last_name: 'Doe'}},
-  {id: 32, listing_title: 'CPS209 extra help', image: '', listing_type: 'Academic service', location: 'Toronto, ON', price: 12, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', listing_user: {first_name: 'Bryan', last_name: 'Doe'}},
-]
 
 // Return all listings.
 exports.allListings_get = asyncHandler(async (req, res, next) => {
 
-  const searchQuery = req.params.search === 'null' ? '' : req.params.search;
-  const categoryFilter = req.params.category === 'null' ? [] : req.params.category.split(',');
-  const priceFilter = {
+  //retrieve url params
+  const categories = {
+    'wanted': 'items_wanted',
+    'forSale': 'items_for_sale',
+    'academicService': 'academic_services'};
+  const searchParams = req.params.search === 'null' ? '' : req.params.search;
+  const categoryParams = req.params.category === 'null' ? [] : req.params.category.split(',');
+  const categoryFilter = [];
+  const priceParams = {
     min: req.params.minPrice === 'null' ? 0 : parseInt(req.params.minPrice),
     max: req.params.maxPrice === 'null' ? 100000 : parseInt(req.params.maxPrice)
   };
+  const page = req.params.page === 'null' ? 1 : req.params.page;
+  const maxItemsPerPage = 20;
 
-  res.json(testData);
-  // try {
-  //   const listings = await Listing.find({});
-  //   res.json(listings);
-  // } catch (err) {
-  //   console.log(err);
-  //   res.status(500).send({error: "Error occurred retrieving listings."});
-  // }
+  categoryParams.forEach(category => {
+    categoryFilter.push(categories[category])
+  });
+
+  //build queries based on url params
+  let query = {}
+  if (priceParams.min == 0) {
+    query = { $or: [{price: {$eq: null}}, {price: { $lte: priceParams.max }}]};
+  }
+  else {
+    query.price = { $gte: priceParams.min, $lte: priceParams.max};
+  }
+  if (categoryFilter.length != 0) {
+    query.category = { $in: categoryFilter };
+  }
+  query.adName = {$regex: searchParams, $options: 'i'};
+
+  try {
+    const ads = await Ad.find(query).skip(maxItemsPerPage * (page - 1)).limit(maxItemsPerPage);
+    const totalAds = await Ad.find(query).count();
+    const categories = await Category.find({ });
+    const categoryObj = {};
+    
+    categories.forEach(category => {
+      categoryObj[category.category_id] = category.category_type[0]
+    });
+ 
+    const response = []
+    ads.forEach(ad => {
+      response.push({
+        ad,
+        category: categoryObj[ad.category[0]]
+      });
+    });
+
+    res.json({count: totalAds, ads: response});
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({error: "Error occurred retrieving the ad."});
+  }
 });
 
 //Return a listing item
 exports.listingItem_get = asyncHandler(async (req, res, next) => {
 
   const listingId = req.params.id;
-  testData.map((listing) => {
-    if (listing.id == listingId) {
-      res.json(listing);
-    }
-  });
+
+  try {
+    const ad = await Ad.findOne({ adId: listingId });
+    const category = await Category.findOne({ category_id: ad.category[0] });
+    const user = await User.findOne({ userId: ad.userId[0] }, 'username');
+    res.json({ad, category: category.category_type, user});
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({error: "Error occurred retrieving the ad."});
+  }
 });

@@ -13,6 +13,7 @@ import HomeAuthenticated from './pages/Home-Authenticated/Home-Authenticated';
 import HomeAdmin from './pages/Home-Admin/Home-Admin';
 import ClassifiedAdsCatalog from './pages/Classified-Ads-Listings/Classified-Ads-Listings';
 import ClassifiedAdsItem from './pages/Classified-Ads-Item/Classified-Ads-Item';
+import Register from './pages/Register/Register';
 
 function App() {
   return (
