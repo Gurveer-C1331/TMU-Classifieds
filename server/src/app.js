@@ -4,6 +4,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const app = express();
 const listingsRouter = require('./routes/listings');
+const dashboardRouter = require('./routes/dashboard');
 
 // Set up mongoose connection
 const mongoose = require("mongoose");
@@ -23,6 +24,7 @@ app.use(cors());
 
 //Routers
 app.use('/api/listings', listingsRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next)

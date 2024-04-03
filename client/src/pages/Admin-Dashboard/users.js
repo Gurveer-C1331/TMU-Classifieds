@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -8,135 +8,65 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ListingImage from '../../assets/listing-image.svg';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 
-function AdminDashboard()
+function Users()
 {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() =>
+  {
+    //retrieve all listing items from server
+    const fetchUsers = async () =>
+    {
+      try
+      {
+        const response = await fetch(`http://localhost:3001/api/dashboard/users`, {
+          method: 'GET'
+        })
+          .then((response) => response.json())
+          .then((data) => setUsers(data));
+      } catch (error)
+      {
+        console.error("Error fetching classified listings data:", error);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  console.log(users);
 
   return (
-    <div id='home-page' className='main-page-container'>
-      <div id='home-page-heading'>
-        <h1>asdsadsadsadsas!</h1>
-        <span className='subtitle-text'>And a subheading describing your site, too</span><br></br>
-      </div>
-
-      <div id='home-page-quick-admin-info-section'>
-
-      </div>
-
-      <div id='home-page-info-container'>
-        <div className='home-page-info-section' id='lg-info-section'>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2} style={{
-              marginBottom: '3em'
-            }}>
-              <Grid item md={5} style={{
-                margin: 'auto'
-              }}>
-                <h2>Dashboard</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
-                <Link className='primary-button' to='/'>
-                  <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{ color: "#FFF" }} />
-                </Link>
-              </Grid>
-              <Grid item md={6}>
-                <img src={ListingImage} alt='items-wanted'></img>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} style={{
-              marginBottom: '3em'
-            }}>
-              <Grid item md={6}>
-                <img src={ListingImage} alt='items-for-sale'></img>
-              </Grid>
-              <Grid item md={5} style={{
-                margin: 'auto'
-              }}>
-                <h2>Users</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
-                <Link className='primary-button' to='/'>
-                  <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{ color: "#FFF" }} />
-                </Link>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} style={{
-              marginBottom: '5em'
-            }}>
-              <Grid item md={5} style={{
-                margin: 'auto'
-              }}>
-                <h2>Classified Ads</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
-                <Link className='primary-button' to='/'>
-                  <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{ color: "#FFF" }} />
-                </Link>
-              </Grid>
-              <Grid item md={6}>
-                <img src={ListingImage} alt='academic-services'></img>
-              </Grid>
-            </Grid>
-          </Box>
-        </div>
-
-        <div className='home-page-info-section' id='sm-info-section'>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2} style={{
-              marginBottom: '3em',
-              textAlign: 'center',
-              justifyContent: 'center'
-            }}>
-              <Grid item md={6}>
-                <img src={ListingImage} alt='items-wanted'></img>
-              </Grid>
-              <Grid item md={5} style={{
-                margin: 'auto'
-              }}>
-                <h2>Dashboard</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
-                <Link className='primary-button' to='/classified-ads?category=wanted'>
-                  <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{ color: "#FFF" }} />
-                </Link>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} style={{
-              marginBottom: '3em',
-              textAlign: 'center',
-              justifyContent: 'center'
-            }}>
-              <Grid item md={6}>
-                <img src={ListingImage} alt='items-for-sale'></img>
-              </Grid>
-              <Grid item md={5} style={{
-                margin: 'auto'
-              }}>
-                <h2>Users</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
-                <Link className='primary-button' to='/classified-ads?category=forSale'>
-                  <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{ color: "#FFF" }} />
-                </Link>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} style={{
-              marginBottom: '5em',
-              textAlign: 'center',
-              justifyContent: 'center'
-            }}>
-              <Grid item md={6}>
-                <img src={ListingImage} alt='academic-services'></img>
-              </Grid>
-              <Grid item md={5} style={{
-                margin: 'auto'
-              }}>
-                <h2>Classified Ads</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
-                <Link className='primary-button' to='/classified-ads?category=academicService'>
-                  <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{ color: "#FFF" }} />
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </div>
+    <div class='main-page-container' id='home-page' className='main-page-container'>
+      <div class="center">
+        <table>
+          <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Home Address</th>
+            <th>Date of Birth</th>
+            <th></th>
+          </tr>
+          {
+            users.map((user) =>
+            (
+              <tr>
+                <td>{user.username}</td>
+                <td>{user.firstname} {user.lastname}</td>
+                <td>{user.sex}</td>
+                <td>{user.email}</td>
+                <td>{user.phoneNumber}</td>
+                <td>{user.home_address}</td>
+                <td>{user.date_of_birth.substring(0, 10)}</td>
+                <td><button>Modify</button></td>
+              </tr>
+            ))
+          }
+        </table>
       </div>
     </div>
   );
 }
 
-export default AdminDashboard;
+export default Users;

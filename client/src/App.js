@@ -14,6 +14,7 @@ import HomeAdmin from './pages/Home-Admin/Home-Admin';
 import ClassifiedAdsCatalog from './pages/Classified-Ads-Listings/Classified-Ads-Listings';
 import ClassifiedAdsItem from './pages/Classified-Ads-Item/Classified-Ads-Item';
 import AdminDashboard from './pages/Admin-Dashboard/Admin-Dashboard';
+import Users from './pages/Admin-Dashboard/users';
 
 function App()
 {
@@ -28,8 +29,7 @@ function App()
         <Route exact path='/' element={<HomeAuthenticated></HomeAuthenticated>}></Route>
         <Route exact path='/' element={<HomeAdmin></HomeAdmin>}></Route>
         <Route exact path='/dashboard' element={<AdminDashboard></AdminDashboard>}></Route>
-        <Route exact path='/users' element={<HomeAdmin></HomeAdmin>}></Route>
-        <Route exact path='/ad-management' element={<HomeAdmin></HomeAdmin>}></Route>
+        <Route exact path='/users' element={<Users></Users>}></Route>
         <Route exact path='/classified-ads' element={<ClassifiedAdsCatalog></ClassifiedAdsCatalog>}></Route>
         <Route exact path='/classified-ads/:listing-id' element={<ClassifiedAdsItem></ClassifiedAdsItem>}></Route>
       </Routes>
