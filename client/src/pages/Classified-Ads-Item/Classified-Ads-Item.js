@@ -11,6 +11,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 function ClassifiedAdsItem() {
   const [listingItem, setlistingItem] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const listingItemId = useParams()['listing-id'];
   // console.log(listingItemId);
@@ -33,7 +34,29 @@ function ClassifiedAdsItem() {
     fetchLisitingItem();
   }, [listingItemId]);
 
+  useEffect(() => {
+    //retrieve listing item from server
+    const fetchisAdmin = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/user/isAdmin`, {
+          method: 'GET'
+        })
+          .then((response) => {
+            if (response.ok) setIsAdmin(true);
+          });
+      } catch (error) {
+        console.error("Error fetching listing item id: data:", error);
+      }
+    };
+    fetchisAdmin();
+  }, []);
+
   let listingItemDom = null;
+  let deleteBtn = null;
+  if (isAdmin) {
+    deleteBtn = <button id='delete-btn' className='primary-button'>Delete listing</button>;
+  }
+
   if (listingItem) {
     listingItemDom = 
     <Grid container spacing={2}>
@@ -57,7 +80,7 @@ function ClassifiedAdsItem() {
           </div>
 
           <p id='item-description'>{listingItem.ad.description}</p>
-            <button id='delete-btn' className='primary-button'>Delete listing</button>
+            { deleteBtn }
         </div>
       </Grid>
     </Grid>;
