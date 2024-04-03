@@ -54,11 +54,10 @@ function ClassifiedAdsItem() {
             <span id='item-lister'>
               {'Lister: ' + listingItem.user.username}
             </span>
-            {/* <br></br> */}
-            {/* <button id='send-message-btn'>Send message</button> */}
           </div>
 
           <p id='item-description'>{listingItem.ad.description}</p>
+            <button id='delete-btn' className='primary-button'>Delete listing</button>
         </div>
       </Grid>
     </Grid>;
