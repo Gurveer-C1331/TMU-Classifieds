@@ -13,11 +13,12 @@ function Register() {
         lastName: '',
         sex: '',
         homeAddress: '',
-        dateOfBirth: '',
+        dateOfBirth: new Date(),
         phoneNumber: '',
         email: '',
         password: '',
         confirmPassword: '',
+        is_admin: false,
     });
 
     const [formErrors, setFormErrors] = useState({});
@@ -67,9 +68,29 @@ function Register() {
           return;
       }
   
-      // Submit form
-  };
-  
+      fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to register');
+            }
+        })
+        .then(data => {
+            // Handle register
+            console.log(data);
+        })
+        .catch(error => {
+            // Handle error
+            console.error(error);
+        } )
+      }
 
     return (
       <div className="main-page-container">
