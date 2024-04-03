@@ -21,8 +21,8 @@ exports.loginUser = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error('User not found');
   }
-  res.status(200).json(user);
-
   res.cookie('user_id', user._id);
   res.cookie('is_admin', user.is_admin);
+
+  res.status(200).json(user);
 });
