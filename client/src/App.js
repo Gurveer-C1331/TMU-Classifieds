@@ -14,6 +14,7 @@ import HomeAdmin from './pages/Home-Admin/Home-Admin';
 import ClassifiedAdsCatalog from './pages/Classified-Ads-Listings/Classified-Ads-Listings';
 import ClassifiedAdsItem from './pages/Classified-Ads-Item/Classified-Ads-Item';
 import Register from './pages/Register/Register';
+import Login from './pages/Login/Login';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route exact path='/classified-ads' element={<ClassifiedAdsCatalog></ClassifiedAdsCatalog>}></Route>
         <Route exact path='/classified-ads/:listing-id' element={<ClassifiedAdsItem></ClassifiedAdsItem>}></Route>
         <Route exact path='/register' element={<Register></Register>}></Route>
+        <Route exact path='/login' element={<Login></Login>}></Route>
       </Routes>
       <Outlet></Outlet>
 
