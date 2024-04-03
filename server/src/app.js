@@ -8,7 +8,7 @@ const listingsRouter = require('./routes/listings');
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = 'mongodb+srv://generalUser:Nb1kQoV2Exsg0xzz@tmuclassified.esjsjrr.mongodb.net/?retryWrites=true&w=majority&appName=TMUClassified';
+const mongoDB = 'mongodb+srv://generalUser:Nb1kQoV2Exsg0xzz@tmuclassified.esjsjrr.mongodb.net/TMUClassified?retryWrites=true&w=majority&appName=TMUClassified';
 
 main().catch((err) => console.log(err));
 async function main() {

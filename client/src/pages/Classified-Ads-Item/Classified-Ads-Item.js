@@ -21,6 +21,9 @@ function ClassifiedAdsItem() {
         const response = await fetch(`http://localhost:3001/api/listings/${listingItemId}`, {
           method: 'GET'
         })
+        // const response = await fetch(`http://localhost:3001/api/listings/test`, {
+        //   method: 'GET'
+        // })
           .then((response) => response.json())
           .then((data) => setlistingItem(data));
       } catch (error) {
@@ -36,25 +39,26 @@ function ClassifiedAdsItem() {
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
         <div id='item-image-container'>
-          <img src={ListingImage} alt={listingItem.listing_title}></img>
+          <img src={ListingImage} alt={listingItem.ad.adName}></img>
         </div>
       </Grid>
       <Grid item xs={12} md={6}>
         <div id='item-info-container'>
-          <h1 id='item-title'>{listingItem.listing_title}</h1>
-          <span id='item-listing-type'>{listingItem.listing_type}</span><br></br>
-          <span id='item-price'>{listingItem.listing_type === 'Item wanted' ? '' : '$' + listingItem.price}</span><br></br>
+          <h1 id='item-title'>{listingItem.ad.adName}</h1>
+          <span id='item-listing-type'>{listingItem.category.category_type}</span><br></br>
+          <span id='item-price'>{listingItem.category == 'Item wanted' ? '' : '$' + listingItem.ad.price}</span><br></br>
           <FontAwesomeIcon icon={faLocationDot} style={{color: "#004c9b"}} />
-          <span id='item-location'>{listingItem.location}</span>
+          <span id='item-location'>{listingItem.ad.location}</span>
 
           <div id='item-lister-contact'>
             <span id='item-lister'>
-              {'Contact ' + listingItem.listing_user.first_name + ' ' + listingItem.listing_user.last_name}
-            </span><br></br>
-            <button id='send-message-btn'>Send message</button>
+              {'Lister: ' + listingItem.user.username}
+            </span>
+            {/* <br></br> */}
+            {/* <button id='send-message-btn'>Send message</button> */}
           </div>
 
-          <p id='item-description'>{listingItem.description}</p>
+          <p id='item-description'>{listingItem.ad.description}</p>
         </div>
       </Grid>
     </Grid>;
