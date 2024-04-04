@@ -15,7 +15,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 
 */
 
-exports.registerUser = asyncHandler(async (req, res) =>
+exports.registerUser = asyncHandler(async (req, res, next) =>
 {
     const uname = req.params.username;
     const fname = req.params.firstName;
@@ -26,37 +26,55 @@ exports.registerUser = asyncHandler(async (req, res) =>
     const phone = req.params.phoneNumber;
     const email = req.params.email;
     const password = req.params.password;
-    const is_admin = req.params.is_admin;
 
+    console.log("commit")
     try
     {
-        await userModel.insertOne(
+      /*
+        console.log("commit")
+        await userModel.save(
             {
-                $set:
-                {
-                    username: uname,
-                    firstName: fname,
-                    lastName: lname,
-                    sex: gender,
-                    homeAddress: addr,
-                    DOB: dob,
-                    phoneNumber: phone,
-                    email: email,
-                    password: password,
-                    is_admin: is_admin
-                }
+                    username: "andre.simoes",
+                    firstName: "fname",
+                    lastName: "lname",
+                    sex: "M",
+                    homeAddress: "addr",
+                    DOB: new Date(),
+                    phoneNumber: 647,
+                    email: "email",
+                    password: "password",
+                    is_admin: false
             })
         return;
+        */
+        const newuser = new User(
+          {
+            username: uname,
+            firstName: fname,
+            lastName: lname,
+            sex: gender,
+            homeAddress: addr,
+            DOB: dob,
+            phoneNumber: phone,
+            email: email,
+            password: password,
+            is_admin: false
+          })
+        await newuser.save()
+        res.status(201).json({message: "successful"})
+  
     } catch (err)
     {
         console.log(err);
-        res.status(500).send({ error: "Error occurred adding use." });
+        res.status(569).send({ error: "Error occurred adding use." });
     }
 });
 // Login
 exports.loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email, password });
+  const uname = req.params.username;
+  const password = req.params.password;
+  
+  const user = await User.findOne({ uname, password });
   if (!user) {
     res.status(404);
     throw new Error('User not found');

@@ -68,9 +68,6 @@ function AdminDashboard()
       }
     }
   }
-  console.log(dataset);
-
-
 
   var min = '9'
   var max = '0'
@@ -82,7 +79,7 @@ function AdminDashboard()
 
 
   var max_date = new Date(max)
-  max_date.setDate(max_date.getDate() + 1);
+  //max_date.setDate(max_date.getDate() + 1);
   for (var daylist = [], dt = new Date(min); dt <= max_date; dt.setDate(dt.getDate() + 1))
   {
     daylist.push(new Date(dt));

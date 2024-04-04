@@ -10,22 +10,24 @@ function Register() {
 
     async function submit() {
         const form = document.getElementById("user-info");
-        const formData = {
-            username: form.elements["uname"].value,
-            firstName: form.elements["fname"].value,
-            lastName: form.elements["lname"].value,
-            sex: form.elements["gender"].value,
-            homeAddress: form.elements["addr"].value,
-            DOB: form.elements["dob"].value,
-            phoneNumber: form.elements["phone"].value,
-            email: form.elements["email"].value,
-            password: form.elements["password"].value,
-            confirmPassword: form.elements["confirmPassword"].value,
-            is_admin: false,
-        };
+        if (form.elements["uname"].value == "" ||
+        form.elements["fname"].value == "" ||
+        form.elements["lname"].value == "" ||
+        form.elements["gender"].value == "" ||
+        form.elements["addr"].value == "" ||
+        form.elements["dob"].value == "" ||
+        form.elements["phone"].value == "" ||
+        form.elements["email"].value == "" ||
+        form.elements["password"].value == "" 
+        )
+        {
+        console.log("lmao")
+        return;
+        }
 
+        console.log(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`)
         try {
-            const response = await fetch(`http://localhost:3001/api/dashboard/users/update/${formData.username}-${formData.firstName}-${formData.lastName}-${formData.sex}-${formData.email}-${formData.phoneNumber}-${formData.homeAddress}-${formData.DOB}`, {
+            const response = await fetch(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`, {
                 method: 'GET'
             });
             const data = await response.json();
@@ -42,11 +44,12 @@ function Register() {
                 First Name <input type="text" name="fname" />
                 Last Name <input type="text" name="lname" />
                 Gender <input type="text" name="gender" />
-                <br></br>
-                Email <input type="text" name="email" />
-                Phone Number <input type="text" name="phone" />
                 Home Address <input type="text" name="addr" />
+                <br></br>
                 Date of Birth <input type="text" name="dob" />
+                Phone Number <input type="text" name="phone" />
+                Email <input type="text" name="email" />
+                Password <input type="text" name="password" />
             </form>
             <div className="center">
                 <button onClick={submit}>Register</button>
