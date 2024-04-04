@@ -4,6 +4,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const app = express();
 const listingsRouter = require('./routes/listings');
+const dashboardRouter = require('./routes/dashboard');
 const userRouter = require('./routes/user');
 const cookieParser = require('cookie-parser');
 
@@ -13,7 +14,8 @@ mongoose.set("strictQuery", false);
 const mongoDB = 'mongodb+srv://generalUser:Nb1kQoV2Exsg0xzz@tmuclassified.esjsjrr.mongodb.net/TMUClassified?retryWrites=true&w=majority&appName=TMUClassified';
 
 main().catch((err) => console.log(err));
-async function main() {
+async function main()
+{
   await mongoose.connect(mongoDB);
 }
 
@@ -27,15 +29,18 @@ app.use(cookieParser());
 
 //Routers
 app.use('/api/listings', listingsRouter);
+app.use('/api/dashboard', dashboardRouter);
 app.use('/api/user', userRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next)
+{
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next)
+{
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
