@@ -1,7 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 
 function AdPostingInterface() {
+
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/user/currentUser', {
+          method: 'GET'
+        });
+        const data = await response.json();
+        setUsername(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCurrentUser();
+  }, []); 
+
+  // Define sendMessage function outside of useEffect
+  const sendMessage = async () => {
+    try {
+      const category = document.getElementById("category").value;
+      const title = document.getElementById("category").value;
+      const description = document.getElementById("category").value;
+      const price = document.getElementById("category").value;
+      const location = document.getElementById("category").value;
+      const response = await fetch(`http://localhost:3001/api/message/post/${username}-${category}-${title}-${description}-${price}-${location}`, {
+        method: 'GET'
+      });
+      const data = await response.json();
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
   return (
     <div className="main-page-container">
       <h1>Post New Ad</h1>
