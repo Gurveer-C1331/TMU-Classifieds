@@ -102,6 +102,15 @@ function Register() {
             onSubmit={handleSubmit}
         >
             <TextField
+                label="Username"
+                variant="outlined"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                error={!!formErrors.username}
+                helperText={formErrors.username}
+            />
+            <TextField
                 label="First Name"
                 variant="outlined"
                 name="firstName"
