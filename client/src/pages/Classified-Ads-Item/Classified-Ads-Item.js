@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +12,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 
 function ClassifiedAdsItem() {
+  const navigate = useNavigate();
   const [listingItem, setlistingItem] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -54,7 +55,10 @@ function ClassifiedAdsItem() {
     try {
       const response = await fetch(`http://localhost:3001/api/listings/${listingItemId}`, {
         method: 'DELETE'
-      });
+      })
+        .then((response) => {
+          if (response.ok) navigate('/classified-ads');
+        });
     } catch (error) {
       console.error("Error sending message:", error);
     }

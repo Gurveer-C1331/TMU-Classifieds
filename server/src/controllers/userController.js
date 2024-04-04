@@ -111,7 +111,7 @@ exports.isAdmin = asyncHandler(async (req, res) => {
 
   const isAdmin = req.cookies.is_admin === true;
 
-  if (true) {
+  if (isAdmin) {
     res.status(200).send({message: 'Authorized'});
   }
   else {
