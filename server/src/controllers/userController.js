@@ -27,6 +27,13 @@ exports.loginUser = asyncHandler(async (req, res) => {
   res.status(200).json(user);
 });
 
+exports.currentUser = asyncHandler(async (req, res) => {
+
+  const userId = req.cookies.user_id;
+
+  res.status(200).json(userId)
+});
+
 // Check user is signed in
 exports.isSignedIn = asyncHandler(async (req, res) => {
 
