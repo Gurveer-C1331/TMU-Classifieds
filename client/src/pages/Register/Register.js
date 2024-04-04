@@ -21,9 +21,11 @@ function Register() {
         form.elements["password"].value == "" 
         )
         {
+        console.log("lmao")
         return;
         }
 
+        console.log(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`)
         try {
             const response = await fetch(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`, {
                 method: 'GET'
@@ -47,7 +49,7 @@ function Register() {
                 Date of Birth <input type="text" name="dob" />
                 Phone Number <input type="text" name="phone" />
                 Email <input type="text" name="email" />
-                Password <input type="text" name="email" />
+                Password <input type="text" name="password" />
             </form>
             <div className="center">
                 <button onClick={submit}>Register</button>
