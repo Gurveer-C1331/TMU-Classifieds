@@ -22,6 +22,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
     throw new Error('User not found');
   }
   res.cookie('user_id', user.userId);
+  res.cookie('username',user.username);
   res.cookie('is_admin', user.is_admin);
 
   res.status(200).json(user);
@@ -29,9 +30,9 @@ exports.loginUser = asyncHandler(async (req, res) => {
 
 exports.currentUser = asyncHandler(async (req, res) => {
 
-  const userId = req.cookies.user_id;
+  const username = req.cookies.username;
 
-  res.status(200).json(userId)
+  res.status(200).json(username)
 });
 
 // Check user is signed in
