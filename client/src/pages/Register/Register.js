@@ -8,9 +8,7 @@ function Register() {
     const [formErrors, setFormErrors] = useState({});
     const [users, setUsers] = useState([]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
+    async function submit() {
         const form = document.getElementById("user-info");
         const formData = {
             username: form.elements["uname"].value,
@@ -26,58 +24,33 @@ function Register() {
             is_admin: false,
         };
 
-        const errors = {};
-        for (const [key, value] of Object.entries(formData)) {
-            if (!value.trim()) {
-                errors[key] = `${key} is required`;
-            }
-        }
-        if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
-            errors.email = 'Email is invalid';
-        }
-        if (formData.confirmPassword !== formData.password) {
-            errors.confirmPassword = 'Passwords do not match';
-        }
-
-        if (Object.keys(errors).length > 0) {
-            setFormErrors(errors);
-            return;
-        }
-
         try {
             const response = await fetch(`http://localhost:3001/api/dashboard/users/update/${formData.username}-${formData.firstName}-${formData.lastName}-${formData.sex}-${formData.email}-${formData.phoneNumber}-${formData.homeAddress}-${formData.DOB}`, {
                 method: 'GET'
             });
             const data = await response.json();
-            // Handle response data
+            // Handle response data as needed
         } catch (error) {
             console.error("Error fetching classified listings data:", error);
         }
-    };
+    }
 
     return (
         <div className="main-page-container">
-            <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                }}
-                onSubmit={handleSubmit}
-                id="user-info"
-            >
+            <form id="user-info">
                 Username <input type="text" name="uname" />
                 First Name <input type="text" name="fname" />
                 Last Name <input type="text" name="lname" />
                 Gender <input type="text" name="gender" />
-                <br />
+                <br></br>
                 Email <input type="text" name="email" />
                 Phone Number <input type="text" name="phone" />
                 Home Address <input type="text" name="addr" />
                 Date of Birth <input type="text" name="dob" />
-                Password <input type="password" name="password" />
-                Confirm Password <input type="password" name="confirmPassword" />
-                <Button className='primary-button' type="submit" variant="contained">Register</Button>
-            </Box>
+            </form>
+            <div className="center">
+                <button onClick={submit}>Register</button>
+            </div>
         </div>
     );
 }
