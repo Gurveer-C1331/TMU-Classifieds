@@ -92,7 +92,7 @@ function NavAdmin()
             fontWeight: location.pathname === '/' ? '600' : '400'
           }}>
           Users</Link>
-        <Link className='nav-btn' to='/ad-management'
+        <Link className='nav-btn' to='/classified-ads'
           style={{
             fontWeight: location.pathname === '/' ? '600' : '400'
           }}>

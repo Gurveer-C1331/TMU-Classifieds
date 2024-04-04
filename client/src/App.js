@@ -25,9 +25,9 @@ function App()
 {
   return (
     <div className="App">
-      {/* <Nav></Nav> */}
+      <Nav></Nav>
       <NavAuthenticated></NavAuthenticated>
-      {/* <NavAdmin></NavAdmin> */}
+      <NavAdmin></NavAdmin>
 
       <Routes>
         {/* <Route exact path='/' element={<Home></Home>}></Route> */}
@@ -35,6 +35,8 @@ function App()
         {/* <Route exact path='/' element={<HomeAdmin></HomeAdmin>}></Route> */}
         <Route exact path='/dashboard' element={<AdminDashboard></AdminDashboard>}></Route>
         <Route exact path='/users' element={<Users></Users>}></Route>
+        <Route exact path='/signup' element={<Register></Register>}></Route>
+        <Route exact path='/login' element={<Login></Login>}></Route>
         <Route exact path='/classified-ads' element={<ClassifiedAdsCatalog></ClassifiedAdsCatalog>}></Route>
         <Route exact path='/classified-ads/:listing-id' element={<ClassifiedAdsItem></ClassifiedAdsItem>}></Route>
         <Route exact path='/New-Ad' element={<NewAd></NewAd>}></Route>
