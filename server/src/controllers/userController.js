@@ -71,8 +71,10 @@ exports.registerUser = asyncHandler(async (req, res, next) =>
 });
 // Login
 exports.loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email, password });
+  const uname = req.params.username;
+  const password = req.params.password;
+  
+  const user = await User.findOne({ uname, password });
   if (!user) {
     res.status(404);
     throw new Error('User not found');
