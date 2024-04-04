@@ -6,20 +6,24 @@ const asyncHandler = require("express-async-handler");
 // Register
 exports.postAd = asyncHandler(async (req, res) => {
   try {
-    const id = req.params.id;
     const category = req.params.category;
     const title = req.params.title;
     const description = req.params.description;
     const price = req.params.price;
     const location = req.params.location;
-    await postAd.insertMany({
-        sender_id: id,
+    const newPost = new postAd({
+        userId: 3,
+        adId: 3,
         category: category,
         adName: title,
         description: description,
         price: price,
-        location: location
-    });
+        datePosted: 3,
+        location: location,
+        image: 3
+      })
+      await newPost.save();
+    res.status(201).json({message: "successful"})
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

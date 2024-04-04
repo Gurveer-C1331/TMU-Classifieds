@@ -3,8 +3,9 @@ import './styles.css';
 
 function AdPostingInterface() {
 
-  const [username, setUsername] = useState(null);
+  //const [username, setUsername] = useState(null);
 
+  /*
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
@@ -19,7 +20,7 @@ function AdPostingInterface() {
     };
     fetchCurrentUser();
   }, []); 
-
+*/
   const sendMessage = async () => {
     try {
       const category = document.getElementById("category").value;
@@ -27,10 +28,9 @@ function AdPostingInterface() {
       const description = document.getElementById("description").value;
       const price = document.getElementById("price").value;
       const location = document.getElementById("location").value;
-      const response = await fetch(`http://localhost:3001/api/message/post/${username}-${category}-${title}-${description}-${price}-${location}`, {
-        method: 'POST'
+      const response = await fetch(`http://localhost:3001/api/message/post/${category}-${title}-${description}-${price}-${location}`, {
+        method: 'GET'
       });
-      const data = await response.json();
     } catch (error) {
       console.error("Error sending message:", error);
     }
