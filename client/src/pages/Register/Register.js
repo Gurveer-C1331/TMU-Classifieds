@@ -18,16 +18,14 @@ function Register() {
         form.elements["dob"].value == "" ||
         form.elements["phone"].value == "" ||
         form.elements["email"].value == "" ||
-        form.elements["password"].value == "" ||
-        form.elements["admin"].value == ""
+        form.elements["password"].value == "" 
         )
         {
         return;
         }
 
         try {
-            form.elements["admin"].value = false;
-            const response = await fetch(`http://localhost:3001/api/dashboard/users/update/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${form.elements["admin"].value}`, {
+            const response = await fetch(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`, {
                 method: 'GET'
             });
             const data = await response.json();
