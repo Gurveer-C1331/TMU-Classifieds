@@ -4,12 +4,9 @@ const logger = require('morgan');
 const cors = require('cors');
 const app = express();
 const listingsRouter = require('./routes/listings');
-<<<<<<< HEAD
 const dashboardRouter = require('./routes/dashboard');
-=======
 const userRouter = require('./routes/user');
 const cookieParser = require('cookie-parser');
->>>>>>> d218eaa1840a1e1f9f995a46321d074039137e14
 
 // Set up mongoose connection
 const mongoose = require("mongoose");
@@ -32,11 +29,8 @@ app.use(cookieParser());
 
 //Routers
 app.use('/api/listings', listingsRouter);
-<<<<<<< HEAD
 app.use('/api/dashboard', dashboardRouter);
-=======
 app.use('/api/user', userRouter);
->>>>>>> d218eaa1840a1e1f9f995a46321d074039137e14
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next)
