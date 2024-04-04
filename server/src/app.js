@@ -6,6 +6,8 @@ const app = express();
 const listingsRouter = require('./routes/listings');
 const dashboardRouter = require('./routes/dashboard');
 const userRouter = require('./routes/user');
+const messageRouter = require('./routes/message');
+const postingRouter = require('./routes/posting');
 const cookieParser = require('cookie-parser');
 
 // Set up mongoose connection
@@ -31,6 +33,8 @@ app.use(cookieParser());
 app.use('/api/listings', listingsRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/user', userRouter);
+app.use('/api/message', messageRouter);
+app.use('/api/adPost', postingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next)

@@ -84,8 +84,8 @@ function NavAuthenticated() {
             fontWeight: location.pathname === '/classified-ads' ? '600' : '400'
         }}>
           Classified Ads</Link>
-        <Link className='nav-btn' to='/'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></Link>
-        <Link className='nav-btn' to='/'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></Link>
+        <Link className='nav-btn' to='/New-Ad'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></Link>
+        <Link className='nav-btn' to='/Old-Chats'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></Link>
         <Link className='nav-btn' id='profile-link' to='/'>
         <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{color: "#004c9b"}} />
           John Doe
@@ -126,10 +126,10 @@ function NavAuthenticated() {
             }}>Classified Ads</Link>
           </MenuItem>
           <MenuItem onClick={handleClose} disableRipple>
-            <Link className='nav-btn' to='/'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></Link>
+            <Link className='nav-btn' to='/New-Ad'><FontAwesomeIcon className='nav-icon' icon={faPlus} style={{color: "#004c9b"}} /></Link>
           </MenuItem>
           <MenuItem onClick={handleClose} disableRipple>
-            <Link className='nav-btn' to='/'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></Link>
+            <Link className='nav-btn' to='/Old-Chats'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></Link>
           </MenuItem>
           <Divider sx={{ my: 0.5 }} />
           <MenuItem onClick={handleClose} disableRipple>
