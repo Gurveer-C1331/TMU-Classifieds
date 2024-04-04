@@ -23,7 +23,7 @@ function NewChatsPage() {
 
     return (
         <div className="main-page-container">
-            <h1>All Chats</h1>
+            <h1 className='message-title-text'>All Chats</h1>
             <Link to="/comms">
                 <button className="primary-button">Create A New Chat</button>
             </Link>

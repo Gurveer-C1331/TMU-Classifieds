@@ -224,9 +224,9 @@ function ClassifiedAdsListings() {
                         component="img"
                         height="140"
                         // image={item.image}
-                        image={ item.category === 'Item wanted' && ItemWantedImage ||
-                        item.category === 'Item for sale' && ItemForSaleImage ||
-                        item.category === 'Academic service' && AcademicServiceImage }
+                        image={ (item.category === 'Item wanted' && ItemWantedImage) ||
+                        (item.category === 'Item for sale' && ItemForSaleImage) ||
+                        (item.category === 'Academic service' && AcademicServiceImage) }
                         // alt="green iguana"
                       />
                       <CardContent>
