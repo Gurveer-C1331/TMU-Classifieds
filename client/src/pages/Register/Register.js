@@ -9,11 +9,12 @@ import './Register.css';
 function Register() {
 
     const [formData, setFormData] = useState({
+        username: '',
         firstName: '',
         lastName: '',
         sex: '',
         homeAddress: '',
-        dateOfBirth: new Date(),
+        DOB: new Date(),
         phoneNumber: '',
         email: '',
         password: '',
@@ -31,6 +32,9 @@ function Register() {
     const handleSubmit = (e) => {
       e.preventDefault();
       const errors = {};
+      if (!formData.username.trim()) {
+        errors.username = 'Username is required';
+        }
       if (!formData.firstName.trim()) {
           errors.firstName = 'First name is required';
       }
@@ -42,9 +46,6 @@ function Register() {
       }
       if (!formData.homeAddress.trim()) {
           errors.homeAddress = 'Home address is required';
-      }
-      if (!formData.dateOfBirth.trim()) {
-          errors.dateOfBirth = 'Date of birth is required';
       }
       if (!formData.phoneNumber.trim()) {
           errors.phoneNumber = 'Phone number is required';
@@ -68,12 +69,11 @@ function Register() {
           return;
       }
   
-      fetch('http://localhost:3000/register', {
+      fetch(`http://localhost:3000/api/user/register/${formData.username}-${formData.firstName}-${formData.lastName}-${formData.sex}-${formData.homeAddress}-${formData.DOB}-${formData.email}-${formData.password}-${formData.is_admin}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
         })
         .then(response => {
             if (response.ok) {
@@ -136,15 +136,6 @@ function Register() {
                 onChange={handleChange}
                 error={!!formErrors.homeAddress}
                 helperText={formErrors.homeAddress}
-            />
-            <TextField
-                label="Date of Birth"
-                variant="outlined"
-                name="dateOfBirth"
-                value={formData.dateOfBirth}
-                onChange={handleChange}
-                error={!!formErrors.dateOfBirth}
-                helperText={formErrors.dateOfBirth}
             />
             <TextField
                 label="Phone Number"
