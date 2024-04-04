@@ -11,6 +11,7 @@ exports.postAd = asyncHandler(async (req, res) => {
     const description = req.params.description;
     const price = req.params.price;
     const location = req.params.location;
+    // console.log(category);
     const newPost = new postAd({
         userId: 3,
         adId: 3,
@@ -18,9 +19,9 @@ exports.postAd = asyncHandler(async (req, res) => {
         adName: title,
         description: description,
         price: price,
-        datePosted: 3,
+        datePosted: new Date(),
         location: location,
-        image: 3
+        image: ''
       })
       await newPost.save();
     res.status(201).json({message: "successful"})

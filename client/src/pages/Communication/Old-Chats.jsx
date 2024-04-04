@@ -24,6 +24,9 @@ function NewChatsPage() {
     return (
         <div className="main-page-container">
             <h1>All Chats</h1>
+            <Link to="/comms">
+                <button className="primary-button">Create A New Chat</button>
+            </Link>
             <div className="messages">
                 {messages && messages.map((message, index) => (
                     <div key={index}>
@@ -32,9 +35,6 @@ function NewChatsPage() {
                 ))}
             </div>
             <br></br>
-            <Link to="/comms">
-                <button className="primary-button">Create A New Chat</button>
-            </Link>
         </div>
     );
 }
