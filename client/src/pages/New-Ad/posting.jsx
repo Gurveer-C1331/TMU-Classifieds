@@ -20,14 +20,13 @@ function AdPostingInterface() {
     fetchCurrentUser();
   }, []); 
 
-  // Define sendMessage function outside of useEffect
   const sendMessage = async () => {
     try {
       const category = document.getElementById("category").value;
-      const title = document.getElementById("category").value;
-      const description = document.getElementById("category").value;
-      const price = document.getElementById("category").value;
-      const location = document.getElementById("category").value;
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const price = document.getElementById("price").value;
+      const location = document.getElementById("location").value;
       const response = await fetch(`http://localhost:3001/api/message/post/${username}-${category}-${title}-${description}-${price}-${location}`, {
         method: 'GET'
       });

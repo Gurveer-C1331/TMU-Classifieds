@@ -53,7 +53,7 @@ function CommunicationPlatform() {
           required
         ></textarea>
         {/* Use onClick event handler to call sendMessage function */}
-        <button type="submit" className="primary-button" onClick={sendMessage}>
+        <button type="button" className="primary-button" onClick={sendMessage}>
           Send
         </button>
       </div>
