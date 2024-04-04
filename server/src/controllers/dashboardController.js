@@ -71,6 +71,8 @@ exports.deleteUser = asyncHandler(async (req, res, next) =>
 
     try
     {
+        const user = await userModel.findOne({ "email": id });
+        await adModel.deleteMany({ "userId": user.userId[0] });
         await userModel.deleteOne({ "email": id });
     } catch (err)
     {

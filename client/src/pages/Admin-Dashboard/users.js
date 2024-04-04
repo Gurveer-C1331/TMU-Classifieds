@@ -14,13 +14,13 @@ function modify(user)
 {
   const form = document.getElementById("user-info");
   form.elements["uname"].value = user.username;
-  form.elements["fname"].value = user.firstname;
-  form.elements["lname"].value = user.lastname;
+  form.elements["fname"].value = user.firstName;
+  form.elements["lname"].value = user.lastName;
   form.elements["gender"].value = user.sex;
   form.elements["email"].value = user.email;
   form.elements["phone"].value = user.phoneNumber;
-  form.elements["addr"].value = user.home_address;
-  form.elements["dob"].value = user.date_of_birth;
+  form.elements["addr"].value = user.homeAddress;
+  form.elements["dob"].value = user.DOB;
 }
 
 function Users()
@@ -32,7 +32,6 @@ function Users()
   {
     const fetchUsers = async () =>
     {
-      console.log(status);
       try
       {
         const response = await fetch(`http://localhost:3001/api/dashboard/users`, {
@@ -147,12 +146,12 @@ function Users()
             (
               <tr key={user.email} id={user.email}>
                 <td>{user.username}</td>
-                <td>{user.firstname} {user.lastname}</td>
+                <td>{user.firstName} {user.lastName}</td>
                 <td>{user.sex}</td>
                 <td>{user.email}</td>
                 <td>{user.phoneNumber}</td>
-                <td>{user.home_address}</td>
-                <td>{user.date_of_birth.substring(0, 10)}</td>
+                <td>{user.homeAddress}</td>
+                <td>{user.DOB[0].substring(0, 10)}</td>
                 <td><button onClick={e => modify(user)}> Select </button></td>
               </tr>
             ))
