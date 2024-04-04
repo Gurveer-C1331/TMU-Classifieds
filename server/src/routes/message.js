@@ -5,7 +5,7 @@ const router = express.Router();
 const message_controller = require('../controllers/messageController');
 
 /* GET all Listing. */
-router.get('/post/:id-:msg', message_controller.postMessage);
+router.get('/post/:msg', message_controller.postMessage);
 router.get('/post/get', message_controller.getMessage);
 
 

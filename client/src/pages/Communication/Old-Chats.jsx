@@ -25,7 +25,7 @@ function NewChatsPage() {
     return (
         <div className="main-page-container">
             <h1>All Chats</h1>
-            <div className="messages">
+            <div className="messages">Is the laptop still available?
                 {/* Messages will be displayed here */}
             </div>
             <ul>

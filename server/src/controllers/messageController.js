@@ -6,12 +6,17 @@ const asyncHandler = require("express-async-handler");
 // Register
 exports.postMessage = asyncHandler(async (req, res) => {
   try {
-    const id = req.params.id;
     const message = req.params.msg;
-    await Message.insertMany({
-        sender_id: id,
-        message_text: message
-    });
+    const newMessage = new Message({
+        message_id: 3,
+        sender_id : 3,
+        receiver_id: 3,
+        ad_id: 3,
+        message_text : message,
+        date_sent: new Date()
+    })
+    await newMessage.save();
+    res.status(201).json({message: "successful"})
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

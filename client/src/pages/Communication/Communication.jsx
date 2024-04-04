@@ -4,8 +4,9 @@ import './Communication_styles.css';
 
 function CommunicationPlatform() {
   
-  const [username, setUsername] = useState(null);
+  //const [username, setUsername] = useState(null);
 
+  /*
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
@@ -20,15 +21,16 @@ function CommunicationPlatform() {
     };
     fetchCurrentUser();
   }, []); 
+  */
 
   // Define sendMessage function outside of useEffect
   const sendMessage = async () => {
     try {
       const message = document.getElementById("message").value;
-      const response = await fetch(`http://localhost:3001/api/message/post/${username}-${message}`, {
+      const response = await fetch(`http://localhost:3001/api/message/post/${message}`, {
         method: 'GET'
       });
-      const data = await response.json();
+      //const data = await response.json();
     } catch (error) {
       console.error("Error sending message:", error);
     }

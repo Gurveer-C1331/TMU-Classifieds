@@ -28,7 +28,7 @@ function AdPostingInterface() {
       const price = document.getElementById("price").value;
       const location = document.getElementById("location").value;
       const response = await fetch(`http://localhost:3001/api/message/post/${username}-${category}-${title}-${description}-${price}-${location}`, {
-        method: 'GET'
+        method: 'POST'
       });
       const data = await response.json();
     } catch (error) {
@@ -69,7 +69,7 @@ function AdPostingInterface() {
             <input type="text" id="price" name="price" />
             <label htmlFor="location" className="subtitle-text">Location:</label>
             <input type="text" id="location" name="location" />
-            <button type="submit" className="primary-button">Post Ad</button>
+            <button type="submit" className="primary-button" onClick={sendMessage}>Post Ad</button>
           </form>
         </div>
       </div>
