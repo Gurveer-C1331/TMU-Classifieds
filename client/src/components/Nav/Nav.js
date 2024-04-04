@@ -73,12 +73,12 @@ function Nav() {
   return (
     <header>
       <Link className='home-btn' to='/'>
-        <img src={tmuLogo} id='logo-nav' alt='TMU Logo'></img>
+        <div id='logo-nav' alt='TMU Logo'></div>
       </Link>
 
       <div id='link-container'>
-        <Link className='sign-up-btn' to='/'>Sign up</Link>
-        <Link className='login-btn' to='/'>Log in</Link>
+        <Link className='sign-up-btn' to='/signup'>Sign up</Link>
+        <Link className='login-btn' to='/login'>Log in</Link>
       </div>
 
       <div id='sm-link-container'>

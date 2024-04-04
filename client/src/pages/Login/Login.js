@@ -40,7 +40,7 @@ function Login() {
       
         .then(response => {
           if (response.ok) {
-              return response.json();
+              console.log("Ok");
           } else {
               throw new Error('Failed to login');
           }
@@ -88,5 +88,4 @@ function Login() {
       );
   }
   
-  export default Login;
-  
+export default Login;
