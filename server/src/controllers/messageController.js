@@ -16,7 +16,7 @@ exports.postMessage = asyncHandler(async (req, res) => {
         date_sent: new Date()
     })
     await newMessage.save();
-    res.status(201).json({message: "successful"})
+    //res.status(201).json({message: "successful"})
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

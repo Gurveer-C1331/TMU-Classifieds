@@ -28,7 +28,7 @@ function AdPostingInterface() {
       const description = document.getElementById("description").value;
       const price = document.getElementById("price").value;
       const location = document.getElementById("location").value;
-      const response = await fetch(`http://localhost:3001/api/message/post/${category}-${title}-${description}-${price}-${location}`, {
+      const response = await fetch(`http://localhost:3001/api/adPost/post/${category}-${title}-${description}-${price}-${location}`, {
         method: 'GET'
       });
     } catch (error) {

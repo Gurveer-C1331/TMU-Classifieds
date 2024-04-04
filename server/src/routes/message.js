@@ -6,7 +6,7 @@ const message_controller = require('../controllers/messageController');
 
 /* GET all Listing. */
 router.get('/post/:msg', message_controller.postMessage);
-router.get('/post/get', message_controller.getMessage);
+router.get('/get', message_controller.getMessage);
 
 
 module.exports = router;

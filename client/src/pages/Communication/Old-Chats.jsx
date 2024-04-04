@@ -5,12 +5,11 @@ import './Communication_styles.css'; // Import styles
 function NewChatsPage() {
     // Assume new chats are fetched from a backend or stored in state
     const [messages, setMessages] = useState(null);
-    const newChats = []
 
     useEffect(() => {
         const sendMessage = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/api/messages/post/get`, {
+                const response = await fetch(`http://localhost:3001/api/message/get`, {
                     method: 'GET'
                 });
                 const data = await response.json();
@@ -25,21 +24,13 @@ function NewChatsPage() {
     return (
         <div className="main-page-container">
             <h1>All Chats</h1>
-            <div className="messages">Is the laptop still available?
-                {/* Messages will be displayed here */}
+            <div className="messages">
+                {messages && messages.map((message, index) => (
+                    <div key={index}>
+                        {message.message_text && message.message_text.length > 0 && message.message_text[0]}
+                    </div>
+                ))}
             </div>
-            <ul>
-                {/* Replace map with a for loop */}
-                {messages && messages.message_text && messages.message_text.length > 0 &&
-                    (() => {
-                        const chatItems = [];
-                        for (let i = 0; i < messages.message_text.length; i++) {
-                            chatItems.push(<li key={i}>{messages.message_text[i]}</li>);
-                        }
-                        return chatItems;
-                    })()
-                }
-            </ul>
             <Link to="/comms">
                 <button className="primary-button">Create A New Chat</button>
             </Link>
