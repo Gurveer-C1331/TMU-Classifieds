@@ -16,7 +16,7 @@ function ClassifiedAdsItem() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const listingItemId = useParams()['listing-id'];
-  // console.log(listingItemId);
+
   useEffect(() => {
     //retrieve listing item from server
     const fetchLisitingItem = async () => {
@@ -24,9 +24,6 @@ function ClassifiedAdsItem() {
         const response = await fetch(`http://localhost:3001/api/listings/${listingItemId}`, {
           method: 'GET'
         })
-        // const response = await fetch(`http://localhost:3001/api/listings/test`, {
-        //   method: 'GET'
-        // })
           .then((response) => response.json())
           .then((data) => setlistingItem(data));
       } catch (error) {
@@ -53,10 +50,20 @@ function ClassifiedAdsItem() {
     fetchisAdmin();
   }, []);
 
+  const deleteAd = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/listings/${listingItemId}`, {
+        method: 'DELETE'
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
+
   let listingItemDom = null;
   let deleteBtn = null;
   if (isAdmin) {
-    deleteBtn = <button id='delete-btn' className='primary-button'>Delete listing</button>;
+    deleteBtn = <button id='delete-btn' className='primary-button' onClick={deleteAd}>Delete listing</button>;
   }
 
   if (listingItem) {
@@ -64,9 +71,9 @@ function ClassifiedAdsItem() {
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
         <div id='item-image-container'>
-          <img src={ listingItem.category == 'Item wanted' && ItemWantedImage ||
-                    listingItem.category == 'Item for sale' && ItemForSaleImage ||
-                    listingItem.category == 'Academic service' && AcademicServiceImage } alt={listingItem.ad.adName}></img>
+          <img src={ (listingItem.category == 'Item wanted' && ItemWantedImage) ||
+                    (listingItem.category == 'Item for sale' && ItemForSaleImage) ||
+                    (listingItem.category == 'Academic service' && AcademicServiceImage) } alt={listingItem.ad.adName}></img>
         </div>
       </Grid>
       <Grid item xs={12} md={6}>
