@@ -214,8 +214,8 @@ function ClassifiedAdsListings() {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             {listingItems.map((item) => (
-              <Grid key={item.ad.adId} item xs={4} sm={3} md={3} lg={2}>
-                <Link to={'/classified-ads/' + item.ad.adId} style={{textDecoration: 'none'}}>
+              <Grid key={item.ad._id} item xs={4} sm={3} md={3} lg={2}>
+                <Link to={'/classified-ads/' + item.ad._id} style={{textDecoration: 'none'}}>
                   <Card className='listing-cards' sx={{ maxWidth: 345 }} style={{
                       boxShadow: '2px 2px 6px 2px rgba(0,0,0,0.14)'
                     }}>

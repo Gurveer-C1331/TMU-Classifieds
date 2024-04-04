@@ -70,7 +70,7 @@ exports.listingItem_get = asyncHandler(async (req, res, next) => {
   const listingId = req.params.id;
 
   try {
-    const ad = await Ad.findOne({ adId: listingId });
+    const ad = await Ad.findOne({ _id: listingId });
     const category = await Category.findOne({ category_id: ad.category[0] });
     const user = await User.findOne({ userId: ad.userId[0] }, 'username');
     res.json({ad, category: category.category_type, user});

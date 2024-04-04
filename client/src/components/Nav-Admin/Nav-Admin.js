@@ -6,7 +6,7 @@ import tmuLogo from '../../assets/tmu-logo.svg';
 import '../Nav/Nav.css';
 import './Nav-Admin.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faUser} from '@fortawesome/free-solid-svg-icons'
+import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const StyledBtn = styled((props) => (
   <Button
@@ -61,14 +61,17 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-function NavAdmin() {
+function NavAdmin()
+{
   const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick = (event) =>
+  {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = () =>
+  {
     setAnchorEl(null);
   };
 
@@ -79,23 +82,23 @@ function NavAdmin() {
       </Link>
 
       <div id='link-container'>
-        <Link className='nav-btn' to='/'
+        <Link className='nav-btn' to='/dashboard'
           style={{
             fontWeight: location.pathname === '/' ? '600' : '400'
-        }}>
+          }}>
           Dashboard</Link>
-        <Link className='nav-btn' to='/'
+        <Link className='nav-btn' to='/users'
           style={{
             fontWeight: location.pathname === '/' ? '600' : '400'
-        }}>
+          }}>
           Users</Link>
-        <Link className='nav-btn' to='/'
+        <Link className='nav-btn' to='/ad-management'
           style={{
             fontWeight: location.pathname === '/' ? '600' : '400'
-        }}>
+          }}>
           Classified Ads</Link>
         <Link className='nav-btn' id='profile-link' to='/'>
-        <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{color: "#004c9b"}} />
+          <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{ color: "#004c9b" }} />
           John Doe
         </Link>
       </div>
@@ -129,24 +132,24 @@ function NavAdmin() {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose} disableRipple>
-            <Link className='nav-btn' to='/' style={{
+            <Link className='nav-btn' to='/dashboard' style={{
               fontWeight: location.pathname === '/' ? '600' : '400'
             }}>Dashboard</Link>
           </MenuItem>
           <MenuItem onClick={handleClose} disableRipple>
-            <Link className='nav-btn' to='/' style={{
+            <Link className='nav-btn' to='/users' style={{
               fontWeight: location.pathname === '/' ? '600' : '400'
             }}>Users</Link>
           </MenuItem>
           <MenuItem onClick={handleClose} disableRipple>
-            <Link className='nav-btn' to='/' style={{
+            <Link className='nav-btn' to='/ad-management' style={{
               fontWeight: location.pathname === '/' ? '600' : '400'
             }}>Classified Ads</Link>
           </MenuItem>
           <Divider sx={{ my: 0.5 }} />
           <MenuItem onClick={handleClose} disableRipple>
             <Link className='nav-btn' id='profile-link' to='/'>
-              <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{color: "#004c9b"}} />
+              <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{ color: "#004c9b" }} />
               John Doe
             </Link>
           </MenuItem>
