@@ -25,7 +25,19 @@ exports.postMessage = asyncHandler(async (req, res) => {
 exports.getMessage = asyncHandler(async (req, res) => {
     try {
         const messages = await Message.find({});
-        res.json(messages);
+        const users = {};
+        (await User.find({})).forEach(user => {
+          users[user.userId] = user.username;
+        });
+        
+        const response = [];
+        messages.forEach(message => {
+          response.push({
+            content: message,
+            user: users[message.sender_id]
+          });
+        });
+        res.json(response);
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
