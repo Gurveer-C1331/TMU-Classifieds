@@ -68,15 +68,9 @@ function AdminDashboard()
       }
     }
   }
+  console.log(dataset);
 
 
-  dataset = [
-    { x: '2024-04-30', y: 9 },
-    { x: '2024-05-20', y: 6 },
-    { x: '2024-01-22', y: 4 },
-    { x: '2024-06-14', y: 2 },
-    { x: '2024-01-23', y: 7 }
-  ];
 
   var min = '9'
   var max = '0'
@@ -105,87 +99,95 @@ function AdminDashboard()
     }
   }
 
+  let DOM = null;
+  if (dataset.length > 0)
+  {
+    DOM =
+      <>
+
+        <div id='home-page-heading'>
+          <h1>Welcome John!</h1>
+        </div>
+
+        <div id='home-page-quick-admin-info-section'>
+
+        </div>
+
+        <div id='home-page-info-container'>
+          <div className='home-page-info-section' id='lg-info-section'>
+            <Grid container spacing={2} justifyContent="center" textAlign="center">
+              <Grid item md={0.75}>
+                <p>Wanted</p>
+              </Grid>
+              <Grid item md={0.75}>
+                <p>For Sale</p>
+              </Grid>
+              <Grid item md={0.75}>
+                <p>Academic Services</p>
+              </Grid>
+
+            </Grid>
+
+            <Grid container spacing={2} justifyContent="center" textAlign="center">
+              <Grid item md={0.75}>
+                <p class="number">{wanted}</p>
+                <p class="sm-text">listings</p>
+              </Grid>
+              <Grid item md={0.75}>
+                <p class="number">{sale}</p>
+                <p class="sm-text">listings</p>
+              </Grid>
+              <Grid item md={0.75}>
+                <p class="number">{academic}</p>
+                <p class="sm-text">listings</p>
+              </Grid>
+            </Grid>
+          </div>
+
+          <br></br>
+          <br></br>
+          <br></br>
+          <div id="graphs">
+            <div id="type" class="center">
+
+              <PieChart
+                series={[
+                  {
+                    data: [
+                      { id: 0, value: wanted, label: 'Wanted', color: '#004c9b' },
+                      { id: 1, value: sale, label: 'For Sale', color: '#33acff' },
+                      { id: 2, value: academic, label: 'Academic Services', color: '#bbc4ca' },
+                    ],
+                  },
+                ]}
+                slotProps={{
+                  legend: {
+                    direction: 'row',
+                    position: { vertical: 'top', horizontal: 'middle' },
+                    padding: 0,
+                  }
+                }}
+                width={400}
+                height={500}
+              />
+            </div>
+
+            <div id="number" class="center">
+              <BarChart
+                dataset={graph_dataset}
+                xAxis={[{ scaleType: 'band', dataKey: 'x' }]}
+                series={[{ dataKey: 'y', color: '#004c9b' }]}
+                width={1500}
+                height={500}
+              />
+            </div>
+          </div>
+        </div>
+      </>
+  }
   return (
     <div class='main-page-container' id='home-page' className='main-page-container'>
-      <div id='home-page-heading'>
-        <h1>Welcome John!</h1>
-      </div>
-
-      <div id='home-page-quick-admin-info-section'>
-
-      </div>
-
-      <div id='home-page-info-container'>
-        <div className='home-page-info-section' id='lg-info-section'>
-          <Grid container spacing={2} justifyContent="center" textAlign="center">
-            <Grid item md={0.75}>
-              <p>Wanted</p>
-            </Grid>
-            <Grid item md={0.75}>
-              <p>For Sale</p>
-            </Grid>
-            <Grid item md={0.75}>
-              <p>Academic Services</p>
-            </Grid>
-
-          </Grid>
-
-          <Grid container spacing={2} justifyContent="center" textAlign="center">
-            <Grid item md={0.75}>
-              <p class="number">{wanted}</p>
-              <p class="sm-text">listings</p>
-            </Grid>
-            <Grid item md={0.75}>
-              <p class="number">{sale}</p>
-              <p class="sm-text">listings</p>
-            </Grid>
-            <Grid item md={0.75}>
-              <p class="number">{academic}</p>
-              <p class="sm-text">listings</p>
-            </Grid>
-          </Grid>
-        </div>
-
-        <br></br>
-        <br></br>
-        <br></br>
-        <div id="graphs">
-          <div id="type" class="center">
-
-            <PieChart
-              series={[
-                {
-                  data: [
-                    { id: 0, value: wanted, label: 'Wanted', color: '#004c9b' },
-                    { id: 1, value: sale, label: 'For Sale', color: '#33acff' },
-                    { id: 2, value: academic, label: 'Academic Services', color: '#bbc4ca' },
-                  ],
-                },
-              ]}
-              slotProps={{
-                legend: {
-                  direction: 'row',
-                  position: { vertical: 'top', horizontal: 'middle' },
-                  padding: 0,
-                }
-              }}
-              width={400}
-              height={500}
-            />
-          </div>
-
-          <div id="number" class="center">
-            <BarChart
-              dataset={graph_dataset}
-              xAxis={[{ scaleType: 'band', dataKey: 'x' }]}
-              series={[{ dataKey: 'y', color: '#004c9b' }]}
-              width={1500}
-              height={500}
-            />
-          </div>
-        </div>
-
-      </div>
+      {DOM}
     </div>
   );
 }

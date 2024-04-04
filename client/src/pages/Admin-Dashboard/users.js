@@ -23,61 +23,16 @@ function modify(user)
   form.elements["dob"].value = user.date_of_birth;
 }
 
-function submit()
-{
-  const form = document.getElementById("user-info");
-  if (form.elements["uname"].value == "" ||
-    form.elements["fname"].value == "" ||
-    form.elements["lname"].value == "" ||
-    form.elements["gender"].value == "" ||
-    form.elements["email"].value == "" ||
-    form.elements["phone"].value == "" ||
-    form.elements["addr"].value == "" ||
-    form.elements["dob"].value == "")
-  {
-    return;
-  }
-
-  //submit
-
-
-}
-
-function deleteUser()
-{
-  const form = document.getElementById("user-info");
-
-  if (form.elements["email"].value == "")
-  {
-    return;
-  }
-
-  //delete
-  const deleteUser = async () =>
-  {
-    try
-    {
-      const response = await fetch(`http://localhost:3001/api/users` + form.elements["email"].value, {
-        method: 'POST'
-      })
-        .then((response) => response.json())
-    } catch (error)
-    {
-      console.error("Error fetching classified listings data:", error);
-    }
-  };
-  deleteUser();
-
-}
-
 function Users()
 {
+  const [status, setStatus] = useState(0);
   const [users, setUsers] = useState([]);
 
   useEffect(() =>
   {
     const fetchUsers = async () =>
     {
+      console.log(status);
       try
       {
         const response = await fetch(`http://localhost:3001/api/dashboard/users`, {
@@ -91,8 +46,65 @@ function Users()
       }
     };
     fetchUsers();
-  }, []);
+  }, [status]);
 
+  function submit()
+  {
+    const form = document.getElementById("user-info");
+    if (form.elements["uname"].value == "" ||
+      form.elements["fname"].value == "" ||
+      form.elements["lname"].value == "" ||
+      form.elements["gender"].value == "" ||
+      form.elements["email"].value == "" ||
+      form.elements["phone"].value == "" ||
+      form.elements["addr"].value == "" ||
+      form.elements["dob"].value == "")
+    {
+      return;
+    }
+
+    const updateUser = async () =>
+    {
+      try
+      {
+        const response = await fetch(`http://localhost:3001/api/dashboard/users/update/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["email"].value}-${form.elements["phone"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}`, {
+          method: 'GET'
+        })
+          .then((response) => response.json())
+      } catch (error)
+      {
+        console.error("Error fetching classified listings data:", error);
+      }
+    };
+    updateUser();
+    setStatus(status + 1);
+  }
+
+  function deleteUser()
+  {
+    const form = document.getElementById("user-info");
+
+    if (form.elements["email"].value == "")
+    {
+      return;
+    }
+
+    const deleteUser = async () =>
+    {
+      try
+      {
+        const response = await fetch(`http://localhost:3001/api/dashboard/users/delete/${form.elements["email"].value}`, {
+          method: 'GET'
+        })
+          .then((response) => response.json())
+      } catch (error)
+      {
+        console.error("Error fetching classified listings data:", error);
+      }
+    };
+    deleteUser();
+    setStatus(status + 1);
+  }
 
   return (
     <div class='main-page-container' id='home-page' className='main-page-container'>
@@ -133,7 +145,7 @@ function Users()
           {
             users.map((user) =>
             (
-              <tr id={user.email}>
+              <tr key={user.email} id={user.email}>
                 <td>{user.username}</td>
                 <td>{user.firstname} {user.lastname}</td>
                 <td>{user.sex}</td>
