@@ -31,6 +31,7 @@ function NewChatsPage() {
                     </div>
                 ))}
             </div>
+            <br></br>
             <Link to="/comms">
                 <button className="primary-button">Create A New Chat</button>
             </Link>
