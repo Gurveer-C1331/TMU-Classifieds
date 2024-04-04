@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,11 +12,12 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 
 function ClassifiedAdsItem() {
+  const navigate = useNavigate();
   const [listingItem, setlistingItem] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const listingItemId = useParams()['listing-id'];
-  // console.log(listingItemId);
+
   useEffect(() => {
     //retrieve listing item from server
     const fetchLisitingItem = async () => {
@@ -24,9 +25,6 @@ function ClassifiedAdsItem() {
         const response = await fetch(`http://localhost:3001/api/listings/${listingItemId}`, {
           method: 'GET'
         })
-        // const response = await fetch(`http://localhost:3001/api/listings/test`, {
-        //   method: 'GET'
-        // })
           .then((response) => response.json())
           .then((data) => setlistingItem(data));
       } catch (error) {
@@ -53,10 +51,23 @@ function ClassifiedAdsItem() {
     fetchisAdmin();
   }, []);
 
+  const deleteAd = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/listings/${listingItemId}`, {
+        method: 'DELETE'
+      })
+        .then((response) => {
+          if (response.ok) navigate('/classified-ads');
+        });
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
+
   let listingItemDom = null;
   let deleteBtn = null;
   if (isAdmin) {
-    deleteBtn = <button id='delete-btn' className='primary-button'>Delete listing</button>;
+    deleteBtn = <button id='delete-btn' className='primary-button' onClick={deleteAd}>Delete listing</button>;
   }
 
   if (listingItem) {
@@ -64,9 +75,9 @@ function ClassifiedAdsItem() {
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
         <div id='item-image-container'>
-          <img src={ listingItem.category == 'Item wanted' && ItemWantedImage ||
-                    listingItem.category == 'Item for sale' && ItemForSaleImage ||
-                    listingItem.category == 'Academic service' && AcademicServiceImage } alt={listingItem.ad.adName}></img>
+          <img src={ (listingItem.category == 'Item wanted' && ItemWantedImage) ||
+                    (listingItem.category == 'Item for sale' && ItemForSaleImage) ||
+                    (listingItem.category == 'Academic service' && AcademicServiceImage) } alt={listingItem.ad.adName}></img>
         </div>
       </Grid>
       <Grid item xs={12} md={6}>

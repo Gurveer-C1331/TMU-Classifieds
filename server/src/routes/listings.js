@@ -10,4 +10,6 @@ router.get('/:search-:category-:minPrice-:maxPrice-:page', listing_controller.al
 /* GET a Listing Item. */
 router.get('/:id', listing_controller.listingItem_get);
 
+router.delete('/:id', listing_controller.listingItem_delete);
+
 module.exports = router;

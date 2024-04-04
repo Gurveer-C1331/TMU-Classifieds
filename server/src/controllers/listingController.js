@@ -79,3 +79,17 @@ exports.listingItem_get = asyncHandler(async (req, res, next) => {
     res.status(500).send({error: "Error occurred retrieving the ad."});
   }
 });
+
+//Delete a listing item
+exports.listingItem_delete = asyncHandler(async (req, res, next) => {
+
+  const listingId = req.params.id;
+
+  try {
+    const ad = await Ad.deleteOne({ _id: listingId });
+    res.status(200).send({message: "Ad " + listingId + " was deleted successfully."});
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({error: "Error occurred deleting the ad."});
+  }
+});

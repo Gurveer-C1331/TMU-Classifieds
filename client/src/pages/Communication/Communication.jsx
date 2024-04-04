@@ -38,7 +38,7 @@ function CommunicationPlatform() {
 
   return (
     <div className="main-page-container">
-      <h1>Create A New Chat</h1>
+      <h1 className='message-title-text'>Create A New Chat</h1>
       <div className="back-button">
         <Link to="/Old-Chats">
           <button type="submit" className="secondary-button">
