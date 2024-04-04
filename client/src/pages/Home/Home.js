@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import './Home.css';
@@ -12,7 +13,7 @@ function Home() {
         <div id='home-page-heading'>
           <h1>Welcome to TMU Classifieds</h1>
           <span className='subtitle-text'>And a subheading describing your site, too</span><br></br>
-          <button id='join-today-btn' className='primary-button'>Join today!</button>
+          <Link to="/register" className='primary-button'>Join today!</Link>
         </div>
 
         <div id='home-page-info-container'>
