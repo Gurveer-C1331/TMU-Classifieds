@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import { Button, Menu, MenuItem, Divider } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import tmuLogo from '../../assets/tmu-logo.svg';
 import '../Nav/Nav.css';
 import './Nav-Authenticated.css';
@@ -62,6 +62,7 @@ const StyledMenu = styled((props) => (
 }));
 
 function NavAuthenticated() {
+  const navigate = useNavigate();
   const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -72,10 +73,18 @@ function NavAuthenticated() {
     setAnchorEl(null);
   };
 
+  const handleSignOut = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
+    navigate('/');
+    navigate(0);
+  }
+
   return (
     <header>
       <Link className='home-btn' to='/'>
-        <div id='logo-nav' alt='TMU Logo'></div>
+        <img src={tmuLogo} id='logo-nav' alt='TMU Logo'></img>
       </Link>
 
       <div id='link-container'>
@@ -88,8 +97,9 @@ function NavAuthenticated() {
         <Link className='nav-btn' to='/Old-Chats'><FontAwesomeIcon className='nav-icon' icon={faMessage} style={{color: "#004c9b"}} /></Link>
         <Link className='nav-btn' id='profile-link' to='/'>
         <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{color: "#004c9b"}} />
-          John Doe
+          {localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName')}
         </Link>
+        <span className='nav-btn primary-button' style={{color: '#FFF'}} onClick={handleSignOut}>Sign out</span>
       </div>
 
       <div id='sm-link-container'>
@@ -135,8 +145,13 @@ function NavAuthenticated() {
           <MenuItem onClick={handleClose} disableRipple>
             <Link className='nav-btn' id='profile-link' to='/'>
               <FontAwesomeIcon id='profile-image' className='nav-icon' icon={faUser} style={{color: "#004c9b"}} />
-              John Doe
+                {localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName')}
             </Link>
+          </MenuItem>
+          <MenuItem onClick={handleSignOut} disableRipple>
+            <span>
+              Sign out
+            </span>
           </MenuItem>
         </StyledMenu>
       </div>

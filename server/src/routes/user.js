@@ -5,8 +5,8 @@ const userController = require('../controllers/userController');
 
 router.get('/register/:username-:firstName-:lastName-:sex-:homeAddress-:DOB-:phoneNumber-:email-:password-:is_admin', userController.registerUser);
 router.get('/login/:username-:password', userController.loginUser);
-router.get('/isSignedIn', userController.isSignedIn);
-router.get('/isAdmin', userController.isAdmin);
-router.get('/currentUser', userController.currentUser);
+router.get('/isSignedIn/:user', userController.isSignedIn);
+router.get('/isAdmin/:user', userController.isAdmin);
+router.get('/currentUser/:user', userController.currentUser);
 
 module.exports = router;

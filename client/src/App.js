@@ -20,37 +20,43 @@ import AdminDashboard from './pages/Admin-Dashboard/Admin-Dashboard';
 import Users from './pages/Admin-Dashboard/users';
 import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
-import axios from 'axios';
-
-
 
 function App(){
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-    
+  
   useEffect(() => {
     const checkUser = async () => {
-      try {
-        const signedInResponse = await axios.get('/api/user/isSignedIn');
-        if (signedInResponse.status === 200) {
-          setIsSignedIn(true);
-        } else {
+      if (localStorage.getItem('username')) {
+        try {
+          const signedInResponse = await fetch(`http://localhost:3001/api/user/isSignedIn/${localStorage.getItem('username')}`, {
+            method: 'GET'
+          })
+          .then((response) => {
+            if (response.ok) setIsSignedIn(true);
+            else setIsSignedIn(false);
+          });
+        } catch (error) {
+          console.error("Error checking user is signed in:", error);
           setIsSignedIn(false);
         }
-
-        const adminResponse = await axios.get('/api/user/isAdmin');
-        if (adminResponse.status === 200) {
-          setIsAdmin(true);
-        } else {
+  
+        try {
+          const signedInResponse = await fetch(`http://localhost:3001/api/user/isAdmin/${localStorage.getItem('username')}`, {
+            method: 'GET'
+          })
+          .then((response) => {
+            if (response.ok) setIsAdmin(true);
+            else setIsAdmin(false);
+          });
+        } catch (error) {
+          console.error("Error checking user is an admin user:", error);
           setIsAdmin(false);
         }
-      } catch (error) {
-        setIsSignedIn(false);
-        setIsAdmin(false);
       }
     };
-      checkUser();
-  }, []);
+    checkUser();
+  }, [localStorage.getItem('username')]);
 
   if(isAdmin){
     return (

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import './Login.css';
 
 function Login() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -35,15 +35,16 @@ function Login() {
             return;
         }
 
-        fetch(`http://localhost:3000/login/${formData.username}-${formData.password}`, {
+        fetch(`http://localhost:3001/api/user/login/${formData.username}-${formData.password}`, {
           method: 'GET',
         })
-
-      
         .then(response => {
           if (response.ok) {
-              console.log("Ok");
-              history.push('/'); 
+
+              navigate('/');
+              navigate(0);
+              localStorage.setItem('username', formData.username);
+              return response.json()
           } else {
               throw new Error('Failed to login');
           }
@@ -51,6 +52,8 @@ function Login() {
         .then(data => {
           // Handle login
           console.log(data);
+          localStorage.setItem('firstName', data.firstName[0]);
+          localStorage.setItem('lastName', data.lastName[0]);
         })
         .catch(error => {
           // Handle error

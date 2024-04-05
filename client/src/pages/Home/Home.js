@@ -12,8 +12,10 @@ function Home() {
       <div id='home-page' className='main-page-container'>
         <div id='home-page-heading'>
           <h1>Welcome to TMU Classifieds</h1>
-          <span className='subtitle-text'>And a subheading describing your site, too</span><br></br>
-          <Link to="/register" className='primary-button'>Join today!</Link>
+          <span className='subtitle-text'>And a subheading describing your site, too</span>
+          <br></br>
+          <br></br>
+          <Link to="/register" className='primary-button' id='join-today-btn'>Join today!</Link>
         </div>
 
         <div id='home-page-info-container'>

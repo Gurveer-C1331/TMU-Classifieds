@@ -51,19 +51,7 @@
   height: 200px; /* Adjust the height of the textarea */
 }
 
-.primary-button {
-  padding: 0.8em 2em;
-  border: none;
-  border-radius: 20px;
-  background: #004c9b; /* Blue color */
-  color: #FFF;
-  font-size: 0.8em;
-  cursor: pointer;
-}
 
-.primary-button:hover {
-  background: #0056b3; /* Darker shade of blue */
-}
 .secondary-button {
   padding: 0.8em 2em;
   border: none;
