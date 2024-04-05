@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 
 function AdPostingInterface() {
-
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -42,6 +43,15 @@ function AdPostingInterface() {
           location,
           user: user.username
         })
+      })
+      .then((response) => {
+        if (response.ok) {
+          alert('Ad was posted successfully.');
+          navigate(0);
+        }
+        else {
+          alert('Ad did not post successfully.');
+        }
       });
     } catch (error) {
       console.error("Error sending message:", error);
@@ -81,8 +91,8 @@ function AdPostingInterface() {
             <input type="text" id="price" name="price" />
             <label htmlFor="location" className="subtitle-text">Location:</label>
             <input type="text" id="location" name="location" />
-            <button type="submit" className="primary-button" onClick={sendMessage}>Post Ad</button>
           </form>
+            <button className="primary-button" onClick={sendMessage}>Post Ad</button>
         </div>
       </div>
     </div>

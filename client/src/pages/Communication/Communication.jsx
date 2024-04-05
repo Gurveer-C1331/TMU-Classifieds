@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Communication_styles.css';
 
 function CommunicationPlatform() {
-  
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -35,6 +35,15 @@ function CommunicationPlatform() {
           message: message,
           user: user.username
         })
+      })
+      .then((response) => {
+        if (response.ok) {
+          alert('Message was posted successfully.');
+          navigate('/Old-Chats');
+        }
+        else {
+          alert('Message did not post successfully.');
+        }
       });
     } catch (error) {
       console.error("Error sending message:", error);
@@ -52,17 +61,17 @@ function CommunicationPlatform() {
         </Link>
       </div>
       <div className="message-form-container">
-        <label htmlFor="message">Message:</label>
-        <textarea
-          id="message"
-          name="message"
-          rows="4"
-          required
-        ></textarea>
-        {/* Use onClick event handler to call sendMessage function */}
-        <button type="button" className="primary-button" onClick={sendMessage}>
-          Send
-        </button>
+          <label htmlFor="message">Message:</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            required
+          ></textarea>
+          {/* Use onClick event handler to call sendMessage function */}
+          <button className="primary-button" onClick={sendMessage}>
+            Send
+          </button>
       </div>
     </div>
   )
