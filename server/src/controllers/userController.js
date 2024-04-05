@@ -88,9 +88,11 @@ exports.loginUser = asyncHandler(async (req, res) => {
 
 exports.currentUser = asyncHandler(async (req, res) => {
 
-  const username = req.cookies.username;
+  let username = req.cookies.username;
+  if (!username) username = "general_user";
+  const user = await User.findOne({ username: username }, 'userId username firstName lastName');
 
-  res.status(200).json(username)
+  res.status(200).json(user);
 });
 
 // Check user is signed in
