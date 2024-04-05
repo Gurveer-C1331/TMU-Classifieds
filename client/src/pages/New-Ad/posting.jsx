@@ -3,24 +3,23 @@ import './styles.css';
 
 function AdPostingInterface() {
 
-  //const [username, setUsername] = useState(null);
+  const [user, setUser] = useState(null);
 
-  /*
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/user/currentUser', {
           method: 'GET'
-        });
-        const data = await response.json();
-        setUsername(data);
+        })
+        .then((response) => response.json())
+        .then((data) => setUser(data));
       } catch (error) {
         console.error(error);
       }
     };
     fetchCurrentUser();
-  }, []); 
-*/
+  }, []);
+
   const sendMessage = async () => {
     try {
       const category = document.getElementById("category").value;
@@ -29,8 +28,20 @@ function AdPostingInterface() {
       const price = document.getElementById("price").value;
       const location = document.getElementById("location").value;
       console.log(category);
-      const response = await fetch(`http://localhost:3001/api/adPost/post/${category}-${title}-${description}-${price}-${location}`, {
-        method: 'GET'
+      const response = await fetch(`http://localhost:3001/api/adPost/post`, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          category,
+          title,
+          description,
+          price,
+          location,
+          user: user.username
+        })
       });
     } catch (error) {
       console.error("Error sending message:", error);

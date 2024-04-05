@@ -6,14 +6,15 @@ const asyncHandler = require("express-async-handler");
 // Register
 exports.postAd = asyncHandler(async (req, res) => {
   try {
-    const category = req.params.category;
-    const title = req.params.title;
-    const description = req.params.description;
-    const price = req.params.price;
-    const location = req.params.location;
-    // console.log(category);
+    const category = req.body.category;
+    const title = req.body.title;
+    const description = req.body.description;
+    const price = req.body.price;
+    const location = req.body.location;
+    const user = await User.findOne({ username: req.body.user[0] });
+
     const newPost = new postAd({
-        userId: 3,
+        userId: user.userId,
         adId: 3,
         category: category,
         adName: title,
