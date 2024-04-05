@@ -14,8 +14,20 @@
   padding: 1em;
   margin: 1em;
   background-color: #EEE;
-  text-align: center;
   border-radius: 20px;
+}
+
+.message-user-text {
+  display: block;
+  margin-top: 1em;
+  color: #004c9b;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.message-date-text {
+  font-size: 0.8em;
+  color: #004c9b;
 }
 
 .message-form-container {

@@ -4,33 +4,38 @@ import './Communication_styles.css';
 
 function CommunicationPlatform() {
   
-  //const [username, setUsername] = useState(null);
+  const [user, setUser] = useState(null);
 
-  /*
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/user/currentUser', {
           method: 'GET'
-        });
-        const data = await response.json();
-        setUsername(data);
+        })
+        .then((response) => response.json())
+        .then((data) => setUser(data));
       } catch (error) {
         console.error(error);
       }
     };
     fetchCurrentUser();
-  }, []); 
-  */
+  }, []);
 
   // Define sendMessage function outside of useEffect
   const sendMessage = async () => {
     try {
       const message = document.getElementById("message").value;
-      const response = await fetch(`http://localhost:3001/api/message/post/${message}`, {
-        method: 'GET'
+      const response = await fetch(`http://localhost:3001/api/message/post`, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: message,
+          user: user.username
+        })
       });
-      //const data = await response.json();
     } catch (error) {
       console.error("Error sending message:", error);
     }

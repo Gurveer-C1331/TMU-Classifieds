@@ -5,7 +5,7 @@ const router = express.Router();
 const posting_controller = require('../controllers/postingController');
 
 /* GET all Listing. */
-router.get('/post/:category-:title-:description-:price-:location', posting_controller.postAd);
+router.put('/post', posting_controller.postAd);
 
 
 module.exports = router;

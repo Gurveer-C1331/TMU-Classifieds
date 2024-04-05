@@ -4,7 +4,7 @@ import './Communication_styles.css'; // Import styles
 
 function NewChatsPage() {
     // Assume new chats are fetched from a backend or stored in state
-    const [messages, setMessages] = useState(null);
+    const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         const sendMessage = async () => {
@@ -28,9 +28,16 @@ function NewChatsPage() {
                 <button className="primary-button">Create A New Chat</button>
             </Link>
             <div className="messages">
-                {messages && messages.map((message, index) => (
-                    <div key={index}>
-                        {message.message_text && message.message_text.length > 0 && message.message_text[0]}
+                {messages && messages.map((message) => (
+                    <div key={message._id}>
+                        {message.content.message_text[0]}
+                        <br />
+                        <span className='message-user-text'>
+                            {message.user}
+                        </span>
+                        <span className='message-date-text'>
+                            {new Date(message.content.date_sent[0]).toDateString() + '  ' + new Date(message.content.date_sent[0]).toLocaleTimeString()}
+                        </span>
                     </div>
                 ))}
             </div>

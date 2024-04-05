@@ -7,5 +7,6 @@ router.get('/register/:username-:firstName-:lastName-:sex-:homeAddress-:DOB-:pho
 router.get('/login/:username-:password', userController.loginUser);
 router.get('/isSignedIn', userController.isSignedIn);
 router.get('/isAdmin', userController.isAdmin);
+router.get('/currentUser', userController.currentUser);
 
 module.exports = router;
