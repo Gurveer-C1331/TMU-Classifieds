@@ -1,0 +1,82 @@
+/* CommunicationPlatform.css */
+
+.message-title-text {
+  color: #004c9b; /* Blue color */
+  text-align: center;
+}
+
+.messages {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.messages div {
+  padding: 1em;
+  margin: 1em;
+  background-color: #EEE;
+  border-radius: 20px;
+}
+
+.message-user-text {
+  display: block;
+  margin-top: 1em;
+  color: #004c9b;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.message-date-text {
+  font-size: 0.8em;
+  color: #004c9b;
+}
+
+.message-form-container {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.message-form-container label {
+  display: block;
+  margin-bottom: 10px;
+  color: #004c9b; /* Blue color */
+}
+
+.message-form-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  height: 200px; /* Adjust the height of the textarea */
+}
+
+.primary-button {
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 20px;
+  background: #004c9b; /* Blue color */
+  color: #FFF;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  background: #0056b3; /* Darker shade of blue */
+}
+.secondary-button {
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 20px;
+  background: #004c9b; /* Blue color */
+  color: #FFF;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background: #0056b3; /* Darker shade of blue */
+}
+.back-button {
+padding-left: 90%;
+}

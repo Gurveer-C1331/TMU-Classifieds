@@ -1,83 +1,64 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useHistory } from 'react-router-dom';
 
 import './Register.css';
 
-
-function Register(){
-
-    const RegistrationForm = () => {
-        const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        sex: '',
-        homeAddress: '',
-        dateOfBirth: '',
-        phoneNumber: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        });
-    }
+function Register() {
+    const history = useHistory(); 
     const [formErrors, setFormErrors] = useState({});
+    const [users, setUsers] = useState([]);
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
+    async function submit() {
+        const form = document.getElementById("user-info");
+        if (form.elements["uname"].value == "" ||
+        form.elements["fname"].value == "" ||
+        form.elements["lname"].value == "" ||
+        form.elements["gender"].value == "" ||
+        form.elements["addr"].value == "" ||
+        form.elements["dob"].value == "" ||
+        form.elements["phone"].value == "" ||
+        form.elements["email"].value == "" ||
+        form.elements["password"].value == "" 
+        )
+        {
+        console.log("lmao")
+        return;
+        }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const errors = {};
-        if (!formData.firstName.trim()) {
-          errors.firstName = 'First Name is required';
+        console.log(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`)
+        try {
+            const response = await fetch(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`, {
+                method: 'GET'
+            });
+            const data = await response.json();
+            history.push('/');
+            // Handle response data as needed
+        } catch (error) {
+            console.error("Error fetching classified listings data:", error);
         }
-        if (!formData.lastName.trim()) {
-          errors.lastName = 'Last Name is required';
-        }
-
-        // Add for other fields
-    
-        if (Object.keys(errors).length > 0) {
-          setFormErrors(errors);
-          return;
-        }
+    }
 
     return (
-        <Box
-            component="form"
-            sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}
-            onSubmit={handleSubmit}
-        >
-            <TextField
-                label="First Name"
-                variant="outlined"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                error={!!formErrors.firstName}
-                helperText={formErrors.firstName}
-            />
-            <TextField
-                label="Last Name"
-                variant="outlined"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                error={!!formErrors.lastName}
-                helperText={formErrors.lastName}
-            />
-            {/* Add rest */}
-            <Button type="submit" variant="contained">Register</Button>
-        </Box>
-        );
-    };
-        
+        <div className="main-page-container">
+            <form id="user-info">
+                Username <input type="text" name="uname" />
+                First Name <input type="text" name="fname" />
+                Last Name <input type="text" name="lname" />
+                Gender <input type="text" name="gender" />
+                Home Address <input type="text" name="addr" />
+                <br></br>
+                Date of Birth <input type="text" name="dob" />
+                Phone Number <input type="text" name="phone" />
+                Email <input type="text" name="email" />
+                Password <input type="text" name="password" />
+            </form>
+            <div className="center">
+                <button onClick={submit}>Register</button>
+            </div>
+        </div>
+    );
 }
 
 export default Register;
