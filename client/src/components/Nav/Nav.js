@@ -73,7 +73,7 @@ function Nav() {
   return (
     <header>
       <Link className='home-btn' to='/'>
-        <img src={tmuLogo} id='logo-nav' alt='TMU Logo'></img>
+        <div id='logo-nav' alt='TMU Logo'></div>
       </Link>
 
       <div id='link-container'>
