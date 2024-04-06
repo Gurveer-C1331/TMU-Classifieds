@@ -9,7 +9,7 @@ function AdPostingInterface() {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/user/currentUser', {
+        const response = await fetch(`http://localhost:3001/api/user/currentUser/${localStorage.getItem('username')}`, {
           method: 'GET'
         })
         .then((response) => response.json())

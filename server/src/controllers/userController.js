@@ -73,8 +73,8 @@ exports.registerUser = asyncHandler(async (req, res, next) =>
 exports.loginUser = asyncHandler(async (req, res) => {
   const uname = req.params.username;
   const password = req.params.password;
-  
-  const user = await User.findOne({ uname, password });
+
+  const user = await User.findOne({ username: uname, password: password }, 'userId username firstName lastName');
   if (!user) {
     res.status(404);
     throw new Error('User not found');
@@ -88,8 +88,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
 
 exports.currentUser = asyncHandler(async (req, res) => {
 
-  let username = req.cookies.username;
-  if (!username) username = "general_user";
+  let username = req.params.user;
   const user = await User.findOne({ username: username }, 'userId username firstName lastName');
 
   res.status(200).json(user);
@@ -98,25 +97,33 @@ exports.currentUser = asyncHandler(async (req, res) => {
 // Check user is signed in
 exports.isSignedIn = asyncHandler(async (req, res) => {
 
-  const userId = req.cookies.user_id;
+  try {
+    const user = await User.findOne({ username: req.params.user });
 
-  if (userId) {
-    res.status(200).send({message: 'Unauthorized'});
-  }
-  else {
-    res.status(401).send({message: 'Unauthorized'});
+    if (user) {
+      res.status(200).send({message: 'Authorized'});
+    }
+    else {
+      res.status(401).send({message: 'Unauthorized'});
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });
 
 // Check user is an admin user
 exports.isAdmin = asyncHandler(async (req, res) => {
 
-  const isAdmin = req.cookies.is_admin === true;
+  try {
+    const user = await User.findOne({ username: req.params.user });
 
-  if (isAdmin) {
-    res.status(200).send({message: 'Authorized'});
-  }
-  else {
-    res.status(401).send({message: 'Unauthorized'});
+    if (user.is_admin[0]) {
+      res.status(200).send({message: 'Authorized'});
+    }
+    else {
+      res.status(401).send({message: 'Unauthorized'});
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });

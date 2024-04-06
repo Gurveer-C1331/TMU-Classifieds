@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 import './Register.css';
 
 function Register() {
+    const navigate = useNavigate();
     const [formErrors, setFormErrors] = useState({});
     const [users, setUsers] = useState([]);
 
@@ -31,6 +33,7 @@ function Register() {
                 method: 'GET'
             });
             const data = await response.json();
+            navigate('/'); 
             // Handle response data as needed
         } catch (error) {
             console.error("Error fetching classified listings data:", error);

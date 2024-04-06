@@ -73,7 +73,7 @@ function Nav() {
   return (
     <header>
       <Link className='home-btn' to='/'>
-        <div id='logo-nav' alt='TMU Logo'></div>
+        <img src={tmuLogo} id='logo-nav' alt='TMU Logo'></img>
       </Link>
 
       <div id='link-container'>
@@ -110,10 +110,10 @@ function Nav() {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose} disableRipple>
-            <Link className='sign-up-btn' to='/'>Sign up</Link>
+            <Link className='sign-up-btn' to='/signup'>Sign up</Link>
           </MenuItem>
           <MenuItem className='login-btn' onClick={handleClose} disableRipple>
-            <Link className='login-btn' to='/'>Log in</Link>
+            <Link className='login-btn' to='/login'>Log in</Link>
           </MenuItem>
         </StyledMenu>
       </div>

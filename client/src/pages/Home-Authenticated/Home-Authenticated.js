@@ -13,7 +13,7 @@ function HomeAuthenticated() {
   return (
     <div id='home-page' className='main-page-container'>
       <div id='home-page-heading'>
-        <h1>Welcome back, John!</h1>
+        <h1>Welcome back, {localStorage.getItem('firstName')}!</h1>
         <span className='subtitle-text'>And a subheading describing your site, too</span><br></br>
       </div>
 
