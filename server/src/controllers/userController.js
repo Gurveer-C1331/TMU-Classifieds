@@ -54,7 +54,7 @@ exports.registerUser = asyncHandler(async (req, res, next) =>
             lastName: lname,
             sex: gender,
             homeAddress: addr,
-            DOB: dob,
+            DOB: new Date(),
             phoneNumber: phone,
             email: email,
             password: password,
@@ -73,8 +73,8 @@ exports.registerUser = asyncHandler(async (req, res, next) =>
 exports.loginUser = asyncHandler(async (req, res) => {
   const uname = req.params.username;
   const password = req.params.password;
-
-  const user = await User.findOne({ username: uname, password: password }, 'userId username firstName lastName');
+  
+  const user = await User.findOne({ uname, password });
   if (!user) {
     res.status(404);
     throw new Error('User not found');
@@ -88,7 +88,8 @@ exports.loginUser = asyncHandler(async (req, res) => {
 
 exports.currentUser = asyncHandler(async (req, res) => {
 
-  let username = req.params.user;
+  let username = req.cookies.username;
+  if (!username) username = "general_user";
   const user = await User.findOne({ username: username }, 'userId username firstName lastName');
 
   res.status(200).json(user);
@@ -97,33 +98,25 @@ exports.currentUser = asyncHandler(async (req, res) => {
 // Check user is signed in
 exports.isSignedIn = asyncHandler(async (req, res) => {
 
-  try {
-    const user = await User.findOne({ username: req.params.user });
+  const userId = req.cookies.user_id;
 
-    if (user) {
-      res.status(200).send({message: 'Authorized'});
-    }
-    else {
-      res.status(401).send({message: 'Unauthorized'});
-    }
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+  if (userId) {
+    res.status(200).send({message: 'Unauthorized'});
+  }
+  else {
+    res.status(401).send({message: 'Unauthorized'});
   }
 });
 
 // Check user is an admin user
 exports.isAdmin = asyncHandler(async (req, res) => {
 
-  try {
-    const user = await User.findOne({ username: req.params.user });
+  const isAdmin = req.cookies.is_admin === true;
 
-    if (user.is_admin[0]) {
-      res.status(200).send({message: 'Authorized'});
-    }
-    else {
-      res.status(401).send({message: 'Unauthorized'});
-    }
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+  if (isAdmin) {
+    res.status(200).send({message: 'Authorized'});
+  }
+  else {
+    res.status(401).send({message: 'Unauthorized'});
   }
 });
