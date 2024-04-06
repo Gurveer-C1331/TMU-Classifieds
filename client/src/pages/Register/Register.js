@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import './Register.css';
 
 function Register() {
-    const navigate = useNavigate();
+    const history = useHistory(); 
     const [formErrors, setFormErrors] = useState({});
     const [users, setUsers] = useState([]);
 
@@ -17,7 +17,6 @@ function Register() {
         form.elements["lname"].value == "" ||
         form.elements["gender"].value == "" ||
         form.elements["addr"].value == "" ||
-        form.elements["dob"].value == "" ||
         form.elements["phone"].value == "" ||
         form.elements["email"].value == "" ||
         form.elements["password"].value == "" 
@@ -27,13 +26,13 @@ function Register() {
         return;
         }
 
-        console.log(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`)
+        console.log(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`)
         try {
-            const response = await fetch(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["dob"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`, {
+            const response = await fetch(`http://localhost:3001/api/user/register/${form.elements["uname"].value}-${form.elements["fname"].value}-${form.elements["lname"].value}-${form.elements["gender"].value}-${form.elements["addr"].value}-${form.elements["phone"].value}-${form.elements["email"].value}-${form.elements["password"].value}-${false}`, {
                 method: 'GET'
             });
             const data = await response.json();
-            navigate('/'); 
+            history.push('/');
             // Handle response data as needed
         } catch (error) {
             console.error("Error fetching classified listings data:", error);
@@ -47,9 +46,8 @@ function Register() {
                 First Name <input type="text" name="fname" />
                 Last Name <input type="text" name="lname" />
                 Gender <input type="text" name="gender" />
-                Home Address <input type="text" name="addr" />
                 <br></br>
-                Date of Birth <input type="text" name="dob" />
+                Home Address <input type="text" name="addr" />
                 Phone Number <input type="text" name="phone" />
                 Email <input type="text" name="email" />
                 Password <input type="text" name="password" />
