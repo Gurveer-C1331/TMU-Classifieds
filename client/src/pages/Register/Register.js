@@ -49,7 +49,7 @@ function Register() {
                 Gender <input type="text" name="gender" />
                 Home Address <input type="text" name="addr" />
                 <br></br>
-                Date of Birth <input type="text" name="dob" />
+                Birth Year <input type="text" name="dob" />
                 Phone Number <input type="text" name="phone" />
                 Email <input type="text" name="email" />
                 Password <input type="text" name="password" />
