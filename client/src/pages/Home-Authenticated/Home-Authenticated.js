@@ -14,7 +14,7 @@ function HomeAuthenticated() {
     <div id='home-page' className='main-page-container'>
       <div id='home-page-heading'>
         <h1>Welcome back, {localStorage.getItem('firstName')}!</h1>
-        <span className='subtitle-text'>And a subheading describing your site, too</span><br></br>
+        <span className='subtitle-text'>TMU Classifieds</span><br></br>
       </div>
 
       <div id='home-page-info-container'>
@@ -27,7 +27,7 @@ function HomeAuthenticated() {
                 margin: 'auto'
               }}>
                 <h2>Items wanted</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <p className='subtitle-text'>Things TMU Students Want</p>
                 <Link className='primary-button' to='/classified-ads?category=wanted'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
@@ -46,7 +46,7 @@ function HomeAuthenticated() {
                 margin: 'auto'
               }}>
                 <h2>Items for sale</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <p className='subtitle-text'>Things TMU Students Are Selling</p>
                 <Link className='primary-button' to='/classified-ads?category=forSale'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
@@ -59,7 +59,7 @@ function HomeAuthenticated() {
                 margin: 'auto'
               }}>
                 <h2>Academic services</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <p className='subtitle-text'>Services TMU Students Need</p>
                 <Link className='primary-button' to='/classified-ads?category=academicService'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
@@ -85,7 +85,7 @@ function HomeAuthenticated() {
                 margin: 'auto'
               }}>
                 <h2>Items wanted</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <p className='subtitle-text'>Things TMU Students Want</p>
                 <Link className='primary-button' to='/classified-ads?category=wanted'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
@@ -103,7 +103,7 @@ function HomeAuthenticated() {
                 margin: 'auto'
               }}>
                 <h2>Items for sale</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <p className='subtitle-text'>Things TMU Students Are Selling</p>
                 <Link className='primary-button' to='/classified-ads?category=forSale'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
@@ -121,7 +121,7 @@ function HomeAuthenticated() {
                 margin: 'auto'
               }}>
                 <h2>Academic services</h2>
-                <p className='subtitle-text'>A subheading for this section, as long or as short as you like</p>
+                <p className='subtitle-text'>Services TMU Students Need</p>
                 <Link className='primary-button' to='/classified-ads?category=academicService'>
                   <FontAwesomeIcon icon={faArrowRightLong} size='lg' style={{color: "#FFF"}} />
                 </Link>
